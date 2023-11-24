@@ -20,19 +20,20 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  // Sign in User with email & Password
 
+  // Sign in User with email & Password
   const logIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // loggin user out
-
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
+
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
