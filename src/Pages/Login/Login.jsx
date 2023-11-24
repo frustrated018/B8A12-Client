@@ -2,6 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useAuth from "../../Hooks/useAuth";
+import useToastify from "../../Hooks/useToastify";
 
 const initialValues = {
   email: "",
@@ -22,18 +23,20 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
-
-  const {logIn} = useAuth()
+  const { logIn } = useAuth();
+  const { successToast, errorToast } = useToastify();
 
   const handleSubmit = (values) => {
-    // TODO: Add Firebase Authentication to this
-    console.log("Form submitted with values:", values);
+    // Loging user in
     logIn(values.email, values.password)
-    .then(res=>{
-      // TODO: Remove broweser alert and add Toast
-      console.log(res.user);
-      alert("login successfull")
-    })
+      .then((res) => {
+        const user = res.user;
+        // displaing toast
+        successToast(`${user?.displayName} Welcome Back!`);
+      })
+      .catch((err) => {
+        errorToast(`${err}`);
+      });
   };
 
   return (

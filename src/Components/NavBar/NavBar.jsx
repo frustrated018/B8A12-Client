@@ -3,7 +3,7 @@ import { IoMdMenu } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
 
 const NavBar = () => {
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
 
   const handleLogOut = () => {
     logOut()
@@ -78,24 +78,25 @@ const NavBar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="User Profile Image"
-                  src="https://source.unsplash.com/a-man-wearing-glasses-and-a-black-shirt-iEEBWgY_6lA"
-                />
+                  src={user ? user.photoURL : "https://source.unsplash.com/a-man-wearing-glasses-and-a-black-shirt-iEEBWgY_6lA"}                />
               </div>
             </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <p>User Name</p>
-              </li>
-              <li>
-                <p>Dashboard</p>
-              </li>
-              <li>
-                <button onClick={handleLogOut}>Log Out</button>
-              </li>
-            </ul>
+            {user && (
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <p>{user?.displayName}</p>
+                </li>
+                <li>
+                  <p>Dashboard</p>
+                </li>
+                <li>
+                  <button onClick={handleLogOut}>Log Out</button>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

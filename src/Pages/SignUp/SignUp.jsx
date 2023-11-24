@@ -40,11 +40,15 @@ const SignUp = () => {
         const user = res.user;
         console.log(user);
         // updating user profile
-        updateUserProfile(values.name, values.photo).then(() => {
-          // showing success toast
-          successToast(`Hi ${user.displayName}! Welcome to our site`);
-          //   TODO: Navigate to the previous page if ther is no previous page go to the home page
-        });
+        updateUserProfile(values.name, values.photo)
+          .then(() => {
+            // showing success toast
+            successToast(`Hi ${user.displayName}! Welcome to our site`);
+            //   TODO: Navigate to the previous page if ther is no previous page go to the home page
+          })
+          .catch((err) => {
+            errorToast(`${err}`);
+          });
       })
       .catch((err) => {
         errorToast(`${err}`);
