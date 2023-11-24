@@ -31,17 +31,24 @@ const validationSchema = Yup.object({
 });
 
 const SignUp = () => {
-  const { createUser } = useAuth();
-  const { successToast } = useToastify();
+  const { createUser, updateUserProfile } = useAuth();
+  const { successToast, errorToast } = useToastify();
 
   const handleSubmit = (values) => {
-    console.log(values);
-    createUser(values.email, values.password).then((res) => {
-      console.log(res);
-      // const user = res.user
-      // TODO: Update user Profile with new name and photo url
-      successToast("User created successfully");
-    });
+    createUser(values.email, values.password)
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        // updating user profile
+        updateUserProfile(values.name, values.photo).then(() => {
+          // showing success toast
+          successToast(`Hi ${user.displayName}! Welcome to our site`);
+          //   TODO: Navigate to the previous page if ther is no previous page go to the home page
+        });
+      })
+      .catch((err) => {
+        errorToast(`${err}`);
+      });
   };
 
   return (
