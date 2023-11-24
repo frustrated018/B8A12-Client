@@ -4,7 +4,7 @@ import { IoMdMenu } from "react-icons/io";
 const NavBar = () => {
   const links = [
     { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
+    { to: "/login", label: "Login" },
     { to: "/contact", label: "Contact" },
   ];
 
