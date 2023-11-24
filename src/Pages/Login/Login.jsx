@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -25,6 +26,7 @@ const validationSchema = Yup.object({
 const Login = () => {
   const { logIn } = useAuth();
   const { successToast, errorToast } = useToastify();
+  const navigate = useNavigate()
 
   const handleSubmit = (values) => {
     // Loging user in
@@ -33,6 +35,8 @@ const Login = () => {
         const user = res.user;
         // displaing toast
         successToast(`${user?.displayName} Welcome Back!`);
+        // TODO: Navigating directly to the home page but will update this to specific page next [when using private route]
+        navigate('/');
       })
       .catch((err) => {
         errorToast(`${err}`);

@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { IoMdMenu } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
+import useToastify from "../../Hooks/useToastify";
 
 const NavBar = () => {
   const { logOut, user } = useAuth();
+  const {successToast, errorToast} = useToastify();
 
   const handleLogOut = () => {
     logOut()
       // TODO: Remove broweser alert and add Toast
-      .then(alert("Logout successfull"));
+      .then(successToast("Logout Successfull"))
+      .catch(err=>{errorToast(`${err}`)})
   };
 
   // Nav Links
