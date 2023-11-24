@@ -2,7 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useAuth from "../../Hooks/useAuth";
-import useToastSuccess from "../../Hooks/useToastSuccess";
+import useToastify from "../../Hooks/useToastify";
 
 const initialValues = {
   name: "",
@@ -32,15 +32,15 @@ const validationSchema = Yup.object({
 
 const SignUp = () => {
   const { createUser } = useAuth();
-  const successToast = useToastSuccess();
+  const { successToast } = useToastify();
 
   const handleSubmit = (values) => {
     console.log(values);
     createUser(values.email, values.password).then((res) => {
       console.log(res);
-    //   const user = res.user
+      // const user = res.user
       // TODO: Update user Profile with new name and photo url
-      successToast('User created successfully!')
+      successToast("User created successfully");
     });
   };
 
