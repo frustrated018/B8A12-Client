@@ -33,11 +33,11 @@ const SignUp = () => {
   const { createUser } = useAuth();
 
   const handleSubmit = (values) => {
-    // TODO: Add Firebase Authentication to this
     console.log(values);
     createUser(values.email, values.password)
     .then(res=>{
         console.log(res);
+        // TODO: Show the Toast for successfull login And update the display image and Username
     })
   };
 

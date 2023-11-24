@@ -1,7 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { IoMdMenu } from "react-icons/io";
+import useAuth from "../../Hooks/useAuth";
 
 const NavBar = () => {
+  const { logOut } = useAuth();
+
+  const handleLogOut = () => {
+    logOut()
+      // TODO: Remove broweser alert and add Toast
+      .then(alert("Logout successfull"));
+  };
+
+  // Nav Links
   const links = [
     { to: "/", label: "Home" },
     { to: "/login", label: "Login" },
@@ -77,13 +87,13 @@ const NavBar = () => {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Profile</a>
+                <p>User Name</p>
               </li>
               <li>
-                <a>Settings</a>
+                <p>Dashboard</p>
               </li>
               <li>
-                <a>Logout</a>
+                <button onClick={handleLogOut}>Log Out</button>
               </li>
             </ul>
           </div>
