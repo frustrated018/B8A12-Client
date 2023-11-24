@@ -1,6 +1,31 @@
 import { FcGoogle } from "react-icons/fc";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const initialValues = {
+  email: "",
+  password: "",
+};
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .matches(
+      /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]+$/,
+      "Password must contain at least one uppercase letter and one special character"
+    )
+    .required("Password is required"),
+});
 
 const Login = () => {
+  const handleSubmit = (values) => {
+    // TODO: Add Firebase Authentication to this
+    console.log("Form submitted with values:", values);
+  };
+
   return (
     <>
       <div
@@ -8,8 +33,8 @@ const Login = () => {
         style={{
           backgroundImage:
             "url(https://source.unsplash.com/blue-and-black-abstract-painting-Hlkuojv_P6I)",
-            backgroundSize: "cover",
-            backgroundRepeat:"no-repeat"
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <div
@@ -29,74 +54,77 @@ const Login = () => {
               <div className="text-center mb-10">
                 <h1 className="font-bold text-4xl text-gray-900">Login!!</h1>
               </div>
-              <form>
-                <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-5">
-                    <label htmlFor="" className="text-xs font-semibold px-1">
+              {/* Form */}
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                <Form>
+                  {/* Email Field */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-primary"
+                    >
                       Email
                     </label>
-                    <div className="flex">
-                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
-                      </div>
-                      {/* input Field */}
-                      <input
-                        type="email"
-                        name="email"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-secondary"
-                        placeholder="example@email.com"
-                        required
-                      />
-                    </div>
+                    <Field
+                      type="text"
+                      id="email"
+                      name="email"
+                      className="mt-1 p-2 w-full rounded-md"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="text-red-500"
+                    />
                   </div>
-                </div>
-                <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-12">
-                    <label htmlFor="" className="text-xs font-semibold px-1">
+
+                  {/* Password Field */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-medium text-primary"
+                    >
                       Password
                     </label>
-                    <div className="flex">
-                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
-                      </div>
-                      {/* Input field */}
-                      <input
-                        type="password"
-                        name="password"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-secondary"
-                        placeholder="************"
-                        required
-                      />
+                    <Field
+                      type="password"
+                      id="password"
+                      name="password"
+                      className="mt-1 p-2 w-full rounded-md"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="text-red-500"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-md w-full text-lg font-semibold"
+                  >
+                    Login
+                  </button>
+                  <div className="divider">OR</div>
+                  {/* Google Login Button */}
+                  <button className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-md w-full text-lg font-semibold">
+                    <div className="flex items-center justify-center">
+                      <FcGoogle size={25}></FcGoogle>
+                      <span className="ml-4">Log in with Google</span>
                     </div>
-                  </div>
-                </div>
-                <div className="flex -mx-3">
-                  <div className="w-full px-3">
-                    <button
-                      type="submit"
-                      className="block w-full max-w-xs mx-auto bg-primary hover:bg-accent focus:bg-accent text-white rounded-lg px-3 py-3 font-bold text-[20px]"
-                    >
-                      Login
-                    </button>
-                  </div>
-                </div>
+                  </button>
+                </Form>
+              </Formik>
 
-                <div className="divider">OR</div>
-
-                <button className="block w-full max-w-xs mx-auto bg-primary hover:bg-accent focus:bg-accent text-white rounded-lg px-3 py-3 font-bold text-[20px]">
-                  <div className="flex items-center justify-center">
-                    <FcGoogle size={25}></FcGoogle>
-                    <span className="ml-4">Log in with Google</span>
-                  </div>
-                </button>
-              </form>
               {/* Redirecting */}
               <p className="text-right text-base text-neutral mt-3">
                 Don&apos;t have an Account? {"  "}
-                <a
-                  className="hover:underline hover:text-accent"
-                  href="/signup"
-                >
+                <a className="hover:underline hover:text-accent" href="/signup">
                   Sign Up
                 </a>
               </p>
