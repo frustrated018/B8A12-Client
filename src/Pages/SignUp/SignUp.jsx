@@ -1,6 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import useAuth from "../../Hooks/useAuth";
 
 const initialValues = {
   name: "",
@@ -29,9 +30,15 @@ const validationSchema = Yup.object({
 });
 
 const SignUp = () => {
+  const { createUser } = useAuth();
+
   const handleSubmit = (values) => {
     // TODO: Add Firebase Authentication to this
-    console.log("Form submitted with values:", values);
+    console.log(values);
+    createUser(values.email, values.password)
+    .then(res=>{
+        console.log(res);
+    })
   };
 
   return (
