@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -33,6 +34,7 @@ const validationSchema = Yup.object({
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
   const { successToast, errorToast } = useToastify();
+  const navigate = useNavigate();
 
   const handleSubmit = (values) => {
     createUser(values.email, values.password)
@@ -44,7 +46,8 @@ const SignUp = () => {
           .then(() => {
             // showing success toast
             successToast(`Hi ${user.displayName}! Welcome to our site`);
-            //   TODO: Navigate to the previous page if ther is no previous page go to the home page
+            //   TODO: Navigate to the previous page if ther is no previous page go to the home page [Private route thing]
+            navigate("/");
           })
           .catch((err) => {
             errorToast(`${err}`);
