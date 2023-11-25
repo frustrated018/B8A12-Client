@@ -24,19 +24,31 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
-  const { logIn } = useAuth();
+  const { logIn, googleSignIn } = useAuth();
   const { successToast, errorToast } = useToastify();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  // Loging user in with email and password
   const handleSubmit = (values) => {
-    // Loging user in
     logIn(values.email, values.password)
       .then((res) => {
         const user = res.user;
         // displaing toast
-        successToast(`${user?.displayName} Welcome Back!`);
+        successToast(`${user?.displayName}, Welcome Back!`);
         // TODO: Navigating directly to the home page but will update this to specific page next [when using private route]
-        navigate('/');
+        navigate("/");
+      })
+      .catch((err) => {
+        errorToast(`${err}`);
+      });
+  };
+  // Logging in with google
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((res) => {
+        successToast(` ${res?.user?.displayName}, Welcome back!`);
+        // TODO: Navigating directly to the home page but will update this to specific page next [when using private route]
+        navigate("/");
       })
       .catch((err) => {
         errorToast(`${err}`);
@@ -128,15 +140,18 @@ const Login = () => {
                     Login
                   </button>
                   <div className="divider">OR</div>
-                  {/* Google Login Button */}
-                  <button className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-md w-full text-lg font-semibold">
-                    <div className="flex items-center justify-center">
-                      <FcGoogle size={25}></FcGoogle>
-                      <span className="ml-4">Log in with Google</span>
-                    </div>
-                  </button>
                 </Form>
               </Formik>
+              {/* Google Login Button */}
+              <button
+                onClick={handleGoogleLogin}
+                className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-md w-full text-lg font-semibold"
+              >
+                <div className="flex items-center justify-center">
+                  <FcGoogle size={25}></FcGoogle>
+                  <span className="ml-4">Log in with Google</span>
+                </div>
+              </button>
 
               {/* Redirecting */}
               <p className="text-right text-base text-neutral mt-3">

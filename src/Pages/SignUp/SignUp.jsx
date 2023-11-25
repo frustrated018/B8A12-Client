@@ -32,10 +32,11 @@ const validationSchema = Yup.object({
 });
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, googleSignIn } = useAuth();
   const { successToast, errorToast } = useToastify();
   const navigate = useNavigate();
 
+  // Sign up with email and password
   const handleSubmit = (values) => {
     createUser(values.email, values.password)
       .then((res) => {
@@ -52,6 +53,19 @@ const SignUp = () => {
           .catch((err) => {
             errorToast(`${err}`);
           });
+      })
+      .catch((err) => {
+        errorToast(`${err}`);
+      });
+  };
+
+  // sign up with google
+  const handleGoogleSignUp = () => {
+    googleSignIn()
+      .then((res) => {
+        successToast(`Hi ${res?.user?.displayName}! Welcome to our site`);
+        //   TODO: Navigate to the previous page if ther is no previous page go to the home page [Private route thing]
+        navigate("/");
       })
       .catch((err) => {
         errorToast(`${err}`);
@@ -183,15 +197,18 @@ const SignUp = () => {
                     Sign Up
                   </button>
                   <div className="divider">OR</div>
-                  {/* Google SignUp Button */}
-                  <button className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-md w-full text-lg font-semibold">
-                    <div className="flex items-center justify-center">
-                      <FcGoogle size={25}></FcGoogle>
-                      <span className="ml-4">Sign in with Google</span>
-                    </div>
-                  </button>
                 </Form>
               </Formik>
+              {/* Google SignUp Button */}
+              <button
+                onClick={handleGoogleSignUp}
+                className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-md w-full text-lg font-semibold"
+              >
+                <div className="flex items-center justify-center">
+                  <FcGoogle size={25}></FcGoogle>
+                  <span className="ml-4">Sign in with Google</span>
+                </div>
+              </button>
 
               {/* Redirecting */}
               <p className="text-right text-base text-neutral mt-3">

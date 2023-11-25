@@ -5,13 +5,15 @@ import useToastify from "../../Hooks/useToastify";
 
 const NavBar = () => {
   const { logOut, user } = useAuth();
-  const {successToast, errorToast} = useToastify();
+  const { successToast, errorToast } = useToastify();
 
   const handleLogOut = () => {
     logOut()
       // TODO: Remove broweser alert and add Toast
       .then(successToast("Logout Successfull"))
-      .catch(err=>{errorToast(`${err}`)})
+      .catch((err) => {
+        errorToast(`${err}`);
+      });
   };
 
   // Nav Links
@@ -81,7 +83,12 @@ const NavBar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="User Profile Image"
-                  src={user ? user.photoURL : "https://source.unsplash.com/a-man-wearing-glasses-and-a-black-shirt-iEEBWgY_6lA"}                />
+                  src={
+                    user
+                      ? user.photoURL
+                      : "https://i.ibb.co/HG1zZkj/Screenshot-2023-10-09-160806.png"
+                  }
+                />
               </div>
             </label>
             {user && (
