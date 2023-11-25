@@ -3,11 +3,13 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import ErrorPage from "../Pages/Error/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -19,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "signup",
-        element:<SignUp></SignUp>,
+        element: <SignUp></SignUp>,
       },
     ],
   },
