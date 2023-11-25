@@ -20,7 +20,7 @@ const NavBar = () => {
   const links = [
     { to: "/", label: "Home" },
     { to: "/login", label: "Login" },
-    { to: "/contact", label: "Contact" },
+    { to: "/error", label: "Error" },
   ];
 
   return (
