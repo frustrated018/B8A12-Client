@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const initialValues = {
@@ -28,6 +28,7 @@ const Login = () => {
   const { logIn, googleSignIn } = useAuth();
   const { successToast, errorToast } = useToastify();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Loging user in with email and password
   const handleSubmit = (values) => {
@@ -36,8 +37,7 @@ const Login = () => {
         const user = res.user;
         // displaing toast
         successToast(`${user?.displayName}, Welcome Back!`);
-        // TODO: Navigating directly to the home page but will update this to specific page next [when using private route]
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
         errorToast(`${err}`);
@@ -48,8 +48,7 @@ const Login = () => {
     googleSignIn()
       .then((res) => {
         successToast(` ${res?.user?.displayName}, Welcome back!`);
-        // TODO: Navigating directly to the home page but will update this to specific page next [when using private route]
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
         errorToast(`${err}`);
