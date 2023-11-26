@@ -29,6 +29,7 @@ const Login = () => {
   const { successToast, errorToast } = useToastify();
   const navigate = useNavigate();
   const location = useLocation();
+  const previousLocation = location?.state?.from;
 
   // Loging user in with email and password
   const handleSubmit = (values) => {
@@ -37,7 +38,7 @@ const Login = () => {
         const user = res.user;
         // displaing toast
         successToast(`${user?.displayName}, Welcome Back!`);
-        navigate(location?.state ? location.state : "/");
+        navigate(previousLocation ? previousLocation : "/");
       })
       .catch((err) => {
         errorToast(`${err}`);
@@ -48,11 +49,18 @@ const Login = () => {
     googleSignIn()
       .then((res) => {
         successToast(` ${res?.user?.displayName}, Welcome back!`);
-        navigate(location?.state ? location.state : "/");
+        navigate(previousLocation ? previousLocation : "/");
       })
       .catch((err) => {
         errorToast(`${err}`);
       });
+  };
+  // redirecting to the signup page
+  
+
+  const handleSignUpClick = () => {
+    // Use navigate to go to the signup page with state
+    navigate("/signup", { state: { from: previousLocation } });
   };
 
   return (
@@ -159,7 +167,7 @@ const Login = () => {
               {/* Redirecting */}
               <p className="text-right text-base text-neutral mt-3">
                 Don&apos;t have an Account? {"  "}
-                <a className="hover:underline hover:text-accent" href="/signup">
+                <a className="hover:underline hover:text-accent" onClick={handleSignUpClick}>
                   Sign Up
                 </a>
               </p>

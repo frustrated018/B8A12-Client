@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const initialValues = {
@@ -36,6 +36,7 @@ const SignUp = () => {
   const { createUser, updateUserProfile, googleSignIn } = useAuth();
   const { successToast, errorToast } = useToastify();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Sign up with email and password
   const handleSubmit = (values) => {
@@ -48,8 +49,7 @@ const SignUp = () => {
           .then(() => {
             // showing success toast
             successToast(`Hi ${user.displayName}! Welcome to our site`);
-            //   TODO: Navigate to the previous page if ther is no previous page go to the home page [Private route thing]
-            navigate("/");
+            navigate(location?.state?.from ? location.state?.from : "/");
           })
           .catch((err) => {
             errorToast(`${err}`);
@@ -65,8 +65,7 @@ const SignUp = () => {
     googleSignIn()
       .then((res) => {
         successToast(`Hi ${res?.user?.displayName}! Welcome to our site`);
-        //   TODO: Navigate to the previous page if ther is no previous page go to the home page [Private route thing]
-        navigate("/");
+        navigate(location?.state?.from ? location.state?.from : "/");
       })
       .catch((err) => {
         errorToast(`${err}`);
