@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const initialValues = {
   email: "",
@@ -57,6 +58,9 @@ const Login = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Tech Trends | Login</title>
+      </Helmet>
       <div
         className="min-w-screen min-h-screen bg-base-100 flex items-center justify-center px-5 py-5"
         style={{
