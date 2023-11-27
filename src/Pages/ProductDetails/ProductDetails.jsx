@@ -11,7 +11,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   //   fetching data
   const axiosPublic = useAxiosPublic();
-  const { data: product = [] } = useQuery({
+  const { data: product = [], refetch } = useQuery({
     queryKey: ["product"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/products/details/${id}`);
@@ -22,17 +22,28 @@ const ProductDetails = () => {
   const { name, image, tags, upvoteCount, downvoteCount, longDescription } =
     product;
 
+  // Handling Upvote
+  const handleUpvote = async () => {
+    await axiosPublic.post(`/products/upvote/${id}`);
+    refetch();
+  };
+  // Handling Downvote
+  const handleDownVote = async () => {
+    await axiosPublic.post(`/products/downvote/${id}`);
+    refetch();
+  };
+
   return (
     <>
       <Helmet>
-        <title>Tech Trends | {name}</title>
+        <title>Tech Trends | {`${name}`}</title>
       </Helmet>
       <NavBar></NavBar>
       {/* Details section */}
       <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 w-[90%] lg:w-[70%] mx-auto my-20 shadow-lg">
         {/* Image */}
         <img
-          alt="Student"
+          alt=""
           src={image}
           className="h-56 w-full object-cover sm:h-full"
         />
@@ -76,18 +87,28 @@ const ProductDetails = () => {
           </div>
           {/* Upvote Downvote and Report button */}
           <div className="mt-5 lg:mt-14 grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] mx-auto ">
-            <button className="p-3 bg-green-400 rounded-md flex justify-center items-center gap-2">
+            {/* upvote button */}
+            <button
+              onClick={handleUpvote}
+              className="p-3 bg-green-400 rounded-md flex justify-center items-center gap-2"
+            >
               <BiSolidUpvote size={24} />
               <span>{upvoteCount}</span>
             </button>
-            <button className="p-3 bg-orange-400 rounded-md flex justify-center items-center gap-2">
+            {/* downvote button */}
+            <button
+              onClick={handleDownVote}
+              className="p-3 bg-orange-400 rounded-md flex justify-center items-center gap-2"
+            >
               <BiSolidDownvote size={24} />
               <span>{downvoteCount}</span>
             </button>
+            {/* report button */}
             <button className="p-3 bg-red-400 rounded-md flex justify-center items-center gap-2">
               <span>Report </span>
               <MdReport size={24} />
             </button>
+            {/* review button */}
             <button className="p-3 bg-blue-400 rounded-md flex justify-center items-center gap-2">
               <IoMdAddCircle size={24} />
               <span>Review</span>

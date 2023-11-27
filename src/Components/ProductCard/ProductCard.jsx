@@ -13,7 +13,6 @@ const ProductCard = ({ product }) => {
     shortDescription,
   } = product;
 
-  console.log(_id);
   // Showing more or less tags
 
   const [showAllTags, setShowAllTags] = useState(false);
