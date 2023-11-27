@@ -1,0 +1,57 @@
+[
+  {
+    "productId": 1,
+    "name": "Smartphone X",
+    "image": "https://source.unsplash.com/random/500x500/?tech&1",
+    "tags": ["mobile", "smartphone", "tech", "communication"],
+    "upvoteCount": 15,
+    "downvoteCount": 3,
+    "timestamp": "2023-11-27",
+    "shortDescription": "Powerful and sleek smartphone with advanced features.",
+    "longDescription": "The Smartphone X is a cutting-edge device designed for seamless communication and advanced functionality. With a powerful processor, stunning display, and innovative features, it's the perfect companion for your busy lifestyle."
+  },
+  {
+    "productId": 2,
+    "name": "Laptop Pro",
+    "image": "https://source.unsplash.com/random/500x500/?tech&2",
+    "tags": ["laptop", "technology", "productivity", "computing"],
+    "upvoteCount": 20,
+    "downvoteCount": 5,
+    "timestamp": "2023-11-27",
+    "shortDescription": "High-performance laptop for professional use.",
+    "longDescription": "Introducing the Laptop Pro, a powerhouse designed for professionals seeking top-notch performance. With a sleek design, high-resolution display, and advanced computing capabilities, it's your go-to device for productivity on the go."
+  },
+  {
+    "productId": 3,
+    "name": "Wireless Earbuds Pro",
+    "image": "https://source.unsplash.com/random/500x500/?tech&3",
+    "tags": ["audio", "earbuds", "wireless", "music"],
+    "upvoteCount": 12,
+    "downvoteCount": 2,
+    "timestamp": "2023-11-27",
+    "shortDescription": "Immersive sound experience with cutting-edge wireless technology.",
+    "longDescription": "Experience music like never before with our Wireless Earbuds Pro. These earbuds deliver a truly immersive audio experience with the latest wireless technology, ensuring crystal-clear sound and ultimate comfort for extended listening sessions."
+  },
+  {
+    "productId": 4,
+    "name": "Gaming Console X",
+    "image": "https://source.unsplash.com/random/500x500/?tech&4",
+    "tags": ["gaming", "console", "entertainment", "technology"],
+    "upvoteCount": 25,
+    "downvoteCount": 8,
+    "timestamp": "2023-11-27",
+    "shortDescription": "Next-gen gaming console for an unparalleled gaming experience.",
+    "longDescription": "Immerse yourself in the world of gaming with the Gaming Console X. Boasting next-gen graphics and powerful performance, this console delivers an unparalleled gaming experience. Get ready for breathtaking visuals and responsive gameplay like never before."
+  },
+  {
+    "productId": 5,
+    "name": "Smart Watch Pro",
+    "image": "https://source.unsplash.com/random/500x500/?tech&5",
+    "tags": ["wearable", "smartwatch", "fitness", "health"],
+    "upvoteCount": 18,
+    "downvoteCount": 4,
+    "timestamp": "2023-11-27",
+    "shortDescription": "Advanced smartwatch with health and fitness tracking features.",
+    "longDescription": "Elevate your fitness journey with the Smart Watch Pro. This advanced smartwatch not only keeps you connected but also monitors your health and fitness in real-time. Stay motivated with personalized insights and achieve your wellness goals effortlessly."
+  }
+]
