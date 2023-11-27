@@ -1,17 +1,20 @@
 import { Helmet } from "react-helmet";
 import NavBar from "../../Components/NavBar/NavBar";
 import ProductCard from "../../Components/ProductCard/ProductCard";
-import { useEffect, useState } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
 
-  // TODO: Use Axios When the server is up and running
-  useEffect(() => {
-    fetch("../../../dummyProducts.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  
+  const axiosPublic = useAxiosPublic();
+  const { data: products = [] } = useQuery({ // TODO: Few things are missing here like refetch and ispending [might not need those :3]
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/products");
+      return res.data;
+    },
+  });
 
   return (
     <>
