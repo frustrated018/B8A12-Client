@@ -5,6 +5,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -23,6 +24,9 @@ const ProductDetails = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Tech Trends | {name}</title>
+      </Helmet>
       <NavBar></NavBar>
       {/* Details section */}
       <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 w-[90%] lg:w-[70%] mx-auto my-20 shadow-lg">
