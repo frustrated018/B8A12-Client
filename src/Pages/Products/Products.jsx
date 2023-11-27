@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const Products = () => {
   const [products, setProducts] = useState([]);
 
+  // TODO: Use Axios When the server is up and running
   useEffect(() => {
     fetch("../../../dummyProducts.json")
       .then((res) => res.json())

@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  const { name, image, tags, upvoteCount, downvoteCount, shortDescription } =
-    product;
+  const {
+    productId,
+    name,
+    image,
+    tags,
+    upvoteCount,
+    downvoteCount,
+    shortDescription,
+  } = product;
 
   // Showing more or less tags
 
@@ -65,12 +73,12 @@ const ProductCard = ({ product }) => {
           <p className="mt-1.5 text-sm text-gray-700 overflow-hidden overflow-ellipsis whitespace-nowrap">
             {shortDescription}
           </p>
-
-          <form className="mt-4">
-            <button className="block w-full rounded bg-primary text-white p-4 text-sm font-medium transition hover:scale-105">
+          {/* TODO: Change productId to _id when you get the server up and running */}
+          <Link to={`details/${productId}`}>
+            <button className="block w-full rounded bg-primary text-white p-4 mt-5 text-base font-medium transition hover:scale-105">
               View Details
             </button>
-          </form>
+          </Link>
         </div>
       </section>
     </>
