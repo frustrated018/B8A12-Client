@@ -75,7 +75,7 @@ const ProductDetails = () => {
             </dl>
           </div>
           {/* Upvote Downvote and Report button */}
-          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 w-[90%] mx-auto ">
+          <div className="mt-5 lg:mt-14 grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] mx-auto ">
             <button className="p-3 bg-green-400 rounded-md flex justify-center items-center gap-2">
               <BiSolidUpvote size={24} />
               <span>{upvoteCount}</span>
