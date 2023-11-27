@@ -1,11 +1,19 @@
+import { useState } from "react";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
-
-// TODO: Make the name of the product the view details button and add the up and downvote button at the bottom
-// add report buton either here or pooduct details page
 
 const ProductCard = ({ product }) => {
   const { name, image, tags, upvoteCount, downvoteCount, shortDescription } =
     product;
+
+  // Showing more or less tags
+
+  const [showAllTags, setShowAllTags] = useState(false);
+  const displayedTags = showAllTags ? tags : tags.slice(0, 3);
+
+  const toggleShowAllTags = () => {
+    setShowAllTags(!showAllTags);
+  };
+
   return (
     <>
       <section className="relative block overflow-hidden">
@@ -33,9 +41,8 @@ const ProductCard = ({ product }) => {
         {/* text  */}
         <div className="relative border border-gray-100 bg-secondary p-6">
           {/* Tags */}
-          {/* TODO: Fix the width of this container to fix the responsive issue */}
-          <div className="flex flex-wrap gap-1 w-[300px]">
-            {tags.map((tag, index) => (
+          <div className="flex flex-wrap gap-1 mb-4">
+            {displayedTags.map((tag, index) => (
               <span
                 key={index}
                 className="bg-accent px-3 py-1.5 text-xs font-medium uppercase"
@@ -43,11 +50,21 @@ const ProductCard = ({ product }) => {
                 {tag}
               </span>
             ))}
+            {tags.length > 3 && (
+              <button
+                className="text-primary text-xs font-medium"
+                onClick={toggleShowAllTags}
+              >
+                {showAllTags ? "Show Less" : "Show More"}
+              </button>
+            )}
           </div>
           {/* Product name */}
           <h3 className="mt-4 text-lg font-medium text-gray-900">{name}</h3>
           {/* some sort of description */}
-          <p className="mt-1.5 text-sm text-gray-700">{shortDescription}</p>
+          <p className="mt-1.5 text-sm text-gray-700 overflow-hidden overflow-ellipsis whitespace-nowrap">
+            {shortDescription}
+          </p>
 
           <form className="mt-4">
             <button className="block w-full rounded bg-primary text-white p-4 text-sm font-medium transition hover:scale-105">

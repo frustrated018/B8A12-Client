@@ -21,7 +21,7 @@ const Products = () => {
       <h2 className=" text-center text-3xl text-red-600 mt-10">
         All products will be here
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-screen-xl mx-auto my-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-[90%] lg:w-[80%] mx-auto my-20">
         {products.map((product, idx) => (
           <ProductCard key={idx} product={product}></ProductCard>
         ))}
