@@ -2,8 +2,24 @@ import NavBar from "../../Components/NavBar/NavBar";
 import { BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
 import { MdReport } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
+  const { id } = useParams();
+//   fetching data
+      const axiosPublic = useAxiosPublic();
+    const { data: product = [] } = useQuery({
+      queryKey: ["product"],
+      queryFn: async () => {
+        const res = await axiosPublic.get(`/products/details/${id}`);
+        return res.data;
+      },
+    });
+
+    console.log(product);
+
   return (
     <>
       <NavBar></NavBar>

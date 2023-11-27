@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const {
-    productId,
+    _id,
     name,
     image,
     tags,
@@ -13,6 +13,7 @@ const ProductCard = ({ product }) => {
     shortDescription,
   } = product;
 
+  console.log(_id);
   // Showing more or less tags
 
   const [showAllTags, setShowAllTags] = useState(false);
@@ -74,7 +75,7 @@ const ProductCard = ({ product }) => {
             {shortDescription}
           </p>
           {/* TODO: Change productId to _id when you get the server up and running */}
-          <Link to={`details/${productId}`}>
+          <Link to={`details/${_id}`}>
             <button className="block w-full rounded bg-primary text-white p-4 mt-5 text-base font-medium transition hover:scale-105">
               View Details
             </button>
