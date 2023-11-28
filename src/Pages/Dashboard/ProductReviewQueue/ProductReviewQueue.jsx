@@ -29,29 +29,29 @@ const ProductReviewQueue = () => {
             {/* head */}
             <thead>
               <tr>
-                <th className="text-center font-bold text-black text-lg">#</th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">#</th>
+                <th className="text-center font-bold text-black">
                   Product Image
                 </th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">
                   Product Name
                 </th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">
                   Owner Name
                 </th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">
                   Owner email
                 </th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">
                   Product Status
                 </th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">
                   View Details
                 </th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">
                   Approve Product
                 </th>
-                <th className="text-center font-bold text-black text-lg">
+                <th className="text-center font-bold text-black">
                   Reject Product
                 </th>
               </tr>
@@ -63,7 +63,7 @@ const ProductReviewQueue = () => {
                   <td className="text-center font-bold">
                     <div className="flex items-center gap-3">
                       <div className="avatar">
-                        <div className="w-32 rounded">
+                        <div className=" w-20 rounded">
                           <img src={product.image} alt="Product image" />
                         </div>
                       </div>
