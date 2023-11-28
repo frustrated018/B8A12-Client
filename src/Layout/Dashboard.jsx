@@ -6,12 +6,14 @@ import { ImStatsDots } from "react-icons/im";
 import { FaUsersCog } from "react-icons/fa";
 import { AiFillGift } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   // TODO: Check admin from DB
+  const [isAdmin] = useAdmin();
+
   //   TODO: Make a modarator route as well
-  const isAdmin = true;
   //   const isModarator = false;
   return (
     <>
@@ -82,7 +84,7 @@ const Dashboard = () => {
         {/* dashboard content */}
         <div className="flex-1 p-8">
           <Outlet></Outlet>
-          <ToastContainer/>
+          <ToastContainer />
         </div>
       </div>
     </>
