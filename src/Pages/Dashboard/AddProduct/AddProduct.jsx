@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { TagsInput } from "react-tag-input-component";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const AddProductPlainHTML = () => {
   const [selected, setSelected] = useState(["tech"]);
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
 
+  //   submitting form
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -15,11 +17,43 @@ const AddProductPlainHTML = () => {
     const longDescription = form.longDescription.value;
     const timestamp = new Date().toLocaleDateString();
     const tags = selected;
-    const product = { name, tags, image, shortDescription, longDescription, upvoteCount:0, downvoteCount:0, timestamp};
+    const product = {
+      name,
+      tags,
+      image,
+      shortDescription,
+      longDescription,
+      upvoteCount: 0,
+      downvoteCount: 0,
+      timestamp,
+    };
+    // TODO: Need to send the user data like user email in here
     // Make a post api call
-    const res = await axiosPublic.post('/products/add', {product})
-    console.log(res.data);
-
+    await axiosPublic
+      .post("/products/add", { product })
+      .then((res) => {
+        if (res.status === 201) {
+          // successToast("Product in review")
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your product has been submitted",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Can't submit the product",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.error(error);
+      });
   };
 
   return (
