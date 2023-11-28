@@ -1,5 +1,5 @@
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-import useAuth from "../../Hooks/useAuth";
+import useAuth from "../../../Hooks/useAuth";
 const UserProfile = () => {
     const {user} = useAuth();
   return (

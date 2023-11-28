@@ -8,7 +8,8 @@ import Products from "../Pages/Products/Products";
 import PrivateRoute from "./privateRoute";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import Dashboard from "../Layout/Dashboard";
-import UserProfile from "../Pages/UserProfile/UserProfile";
+import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
+import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -52,11 +53,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path:"userprofile",
-        element:<UserProfile></UserProfile>
-      }
-    ]
-  }
+        path: "userprofile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "addproduct",
+        element: <AddProduct></AddProduct>,
+      },
+    ],
+  },
 ]);
 
 export default router;
