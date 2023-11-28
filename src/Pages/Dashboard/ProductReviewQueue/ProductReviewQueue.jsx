@@ -4,11 +4,13 @@ import { RxCross2 } from "react-icons/rx";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { TbListDetails } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import useToastify from "../../../Hooks/useToastify";
 
 const ProductReviewQueue = () => {
   const axiosSecure = useAxiosSecure();
-// Finding pending products
-  const { data: pendingProducts = [] } = useQuery({
+  const { successToast } = useToastify();
+  // Finding pending products
+  const { data: pendingProducts = [], refetch } = useQuery({
     queryKey: ["pendingProducts"],
     queryFn: async () => {
       const res = await axiosSecure.get("/products/pendingproducts");
@@ -16,7 +18,21 @@ const ProductReviewQueue = () => {
     },
   });
 
-//   
+  // Function to handle product approval
+  const handleApproveProduct = async (productId) => {
+    try {
+      // Make the API call to approve the product
+      await axiosSecure.post(`/products/statusapprove/${productId}`);
+
+      //   success toast
+        successToast("Product Approved")
+      // refetching data afterwards
+      refetch();
+    } catch (error) {
+      // Handle errors here
+      console.error("Error approving product:", error);
+    }
+  };
 
   return (
     <>
@@ -36,9 +52,7 @@ const ProductReviewQueue = () => {
                 <th className="text-center font-bold text-black">
                   Product Name
                 </th>
-                <th className="text-center font-bold text-black">
-                  Owner Name
-                </th>
+                <th className="text-center font-bold text-black">Owner Name</th>
                 <th className="text-center font-bold text-black">
                   Owner email
                 </th>
@@ -80,14 +94,17 @@ const ProductReviewQueue = () => {
                     {product.productStatus}
                   </td>
                   <td className="text-center">
-                  <Link to={`/dashboard/products/details/${product._id}`}>
-                    <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
-                      <TbListDetails size={24} />
-                    </button>
+                    <Link to={`/dashboard/products/details/${product._id}`}>
+                      <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
+                        <TbListDetails size={24} />
+                      </button>
                     </Link>
                   </td>
                   <td className="text-center">
-                    <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
+                    <button
+                      onClick={() => handleApproveProduct(product._id)}
+                      className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600"
+                    >
                       <IoCheckmarkSharp size={24} />
                     </button>
                   </td>
