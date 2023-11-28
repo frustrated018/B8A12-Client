@@ -5,7 +5,8 @@ import axios from "axios";
 // Major ISSUE!!!!!!!
 // TODO: There is a problem with the interceptor [Don't know if it's front or backend issue]
 // When the common user logs in it logs them out with http://localhost:5000/users/checkadmin/james@nothing.com 403 this error repeatedly
-// which makes me think that it is a bakend server issue
+// which makes me think that it is a bakend server issue. But I am not sure
+
 
 
 const axiosSecure = axios.create({
