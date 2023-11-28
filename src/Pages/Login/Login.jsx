@@ -55,6 +55,7 @@ const Login = () => {
           name: res.user.displayName,
           image: res.user.photoURL,
           email: res.user.email,
+          role: "user"
         };
         axiosPublic.post("/users/add", { userInfo });
         successToast(` ${res?.user?.displayName}, Welcome back!`);

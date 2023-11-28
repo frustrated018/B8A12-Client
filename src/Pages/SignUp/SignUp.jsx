@@ -47,6 +47,7 @@ const SignUp = () => {
       name: values.name,
       image: values.photo,
       email: values.email,
+      role: "user"
     };
 
     createUser(values.email, values.password)
@@ -83,6 +84,7 @@ const SignUp = () => {
           name: res.user.displayName,
           image: res.user.photoURL,
           email: res.user.email,
+          role: "user"
         };
         axiosPublic.post("/users/add", { userInfo })
         // showing success toast

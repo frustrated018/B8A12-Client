@@ -1,17 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useToastify from "../../../Hooks/useToastify";
 
 const ManageUsers = () => {
-    // Fetching all users data
   const axiosSecure = useAxiosSecure();
-  const { data: users = [] } = useQuery({
+  const { successToast } = useToastify();
+
+  // Fetching all users data
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
+
+  //   deleting A user from DB
+  const handleDeleteUser = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/delete/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            successToast("User Deleted from Database.");
+          }
+        });
+      }
+    });
+  };
   return (
     <>
       <h1 className="text-4xl font-bold my-5">Total Users: {users.length}</h1>
@@ -42,19 +68,16 @@ const ManageUsers = () => {
                       //   onClick={() => handleMakeAdmin(user)}
                       className="bg-primary p-3 rounded-lg hover:bg-accent"
                     >
-                      <FaUsers
-                        className="text-white"
-                        size={24}
-                      />
+                      <FaUsers className="text-white" size={24} />
                     </button>
                   )}
                 </td>
                 <td>
                   <button
-                    // onClick={() => handleDeleteUser(user)}
+                    onClick={() => handleDeleteUser(user)}
                     className="bg-secondary p-3 rounded-lg hover:bg-accent"
                   >
-                    <FaTrashAlt className="text-red-600" size={24}/>
+                    <FaTrashAlt className="text-red-600" size={24} />
                   </button>
                 </td>
               </tr>

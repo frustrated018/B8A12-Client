@@ -43,6 +43,7 @@ const AddProductPlainHTML = () => {
           });
           form.reset();
           // successToast("Your product has been submitted for review") [don't know why this hook isn't working]
+          // TODO: Fixed the toast issue it should work fine now [Fix it later]
         }
       })
       .catch((error) => {

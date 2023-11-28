@@ -5,6 +5,8 @@ import { BsCollectionFill } from "react-icons/bs";
 import { ImStatsDots } from "react-icons/im";
 import { FaUsersCog } from "react-icons/fa";
 import { AiFillGift } from "react-icons/ai";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Dashboard = () => {
   // TODO: Check admin from DB
@@ -80,6 +82,7 @@ const Dashboard = () => {
         {/* dashboard content */}
         <div className="flex-1 p-8">
           <Outlet></Outlet>
+          <ToastContainer/>
         </div>
       </div>
     </>
