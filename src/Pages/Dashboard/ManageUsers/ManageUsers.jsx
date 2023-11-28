@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
+import { MdAdminPanelSettings } from "react-icons/md";
 import Swal from "sweetalert2";
 import useToastify from "../../../Hooks/useToastify";
 
@@ -51,7 +53,8 @@ const ManageUsers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
-              <th>Update Role</th>
+              <th>Make Admin</th>
+              <th>Make Modarator</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -62,17 +65,22 @@ const ManageUsers = () => {
                 <td className="text-lg font-bold">{user.name}</td>
                 <td className="text-lg font-bold">{user.email}</td>
                 <td className="text-lg font-bold">{user.role}</td>
+
                 <td>
-                  {user.role === "admin" ? (
-                    "Admin"
-                  ) : (
-                    <button
-                      //   onClick={() => handleMakeAdmin(user)}
-                      className="bg-primary p-3 rounded-lg hover:bg-accent"
-                    >
-                      <FaUsers className="text-white" size={24} />
-                    </button>
-                  )}
+                  <button
+                    // onClick={() => handleDeleteUser(user)}
+                    className="bg-secondary p-3 rounded-lg hover:bg-accent"
+                  >
+                    <GrUserAdmin size={24} />
+                  </button>
+                </td>
+                <td>
+                  <button
+                    // onClick={() => handleDeleteUser(user)}
+                    className="bg-secondary p-3 rounded-lg hover:bg-accent"
+                  >
+                    <MdAdminPanelSettings size={24} />
+                  </button>
                 </td>
                 <td>
                   <button
