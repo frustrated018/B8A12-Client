@@ -14,6 +14,7 @@ import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import ProductReviewQueue from "../Pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
 import ReportedProducts from "../Pages/Dashboard/ReportedProducts/ReportedProducts";
+import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 
 const router = createBrowserRouter([
   // Main Routes
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
-      // normal routes
+      // normal user routes
       {
         path: "userprofile",
         element: <UserProfile></UserProfile>,
@@ -73,7 +74,15 @@ const router = createBrowserRouter([
         path: "addproduct",
         element: <AddProduct></AddProduct>,
       },
-
+      {
+        path: "myproducts",
+        element: <MyProducts></MyProducts>,
+      },
+      // Shared route between normal and
+      {
+        path: "products/details/:id",
+        element: <ProductDetails></ProductDetails>,
+      },
       // Admin routes
       {
         path: "manageusers",
@@ -88,10 +97,6 @@ const router = createBrowserRouter([
       {
         path: "productreviewqueue",
         element: <ProductReviewQueue></ProductReviewQueue>,
-      },
-      {
-        path: "products/details/:id",
-        element: <ProductDetails></ProductDetails>,
       },
       {
         path: "reportedproducts",
