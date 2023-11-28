@@ -42,6 +42,13 @@ const SignUp = () => {
 
   // Sign up with email and password
   const handleSubmit = (values) => {
+    // userinfo
+    const userInfo = {
+      name: values.name,
+      image: values.photo,
+      email: values.email,
+    };
+
     createUser(values.email, values.password)
       .then((res) => {
         const user = res.user;
@@ -49,16 +56,14 @@ const SignUp = () => {
         updateUserProfile(values.name, values.photo)
           .then(() => {
             // Adding user info to the DB
-            const userInfo = {
-              name: values.name,
-              image: values.photo,
-              email: values.email,
-            };
-            axiosPublic.post("/users/add", { userInfo });
 
-            // showing success toast
-            successToast(`Hi ${user.displayName}! Welcome to our site`);
-            navigate(location?.state?.from ? location.state?.from : "/");
+            axiosPublic.post("/users/add", { userInfo }).then((res) => {
+              if (res.data.insertedId > 0) {
+                // showing success toast
+                successToast(`Hi ${user.displayName}! Welcome to our site`);
+                navigate(location?.state?.from ? location.state?.from : "/");
+              }
+            });
           })
           .catch((err) => {
             errorToast(`${err}`);
@@ -73,8 +78,16 @@ const SignUp = () => {
   const handleGoogleSignUp = () => {
     googleSignIn()
       .then((res) => {
+        // if there is no user then we add a new user to the db
+        const userInfo = {
+          name: res.user.displayName,
+          image: res.user.photoURL,
+          email: res.user.email,
+        };
+        axiosPublic.post("/users/add", { userInfo })
+        // showing success toast
         successToast(`Hi ${res?.user?.displayName}! Welcome to our site`);
-        navigate(location?.state?.from ? location.state?.from : "/");
+        // navigate(location?.state?.from ? location.state?.from : "/");
       })
       .catch((err) => {
         errorToast(`${err}`);

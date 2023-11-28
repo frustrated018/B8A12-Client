@@ -32,7 +32,7 @@ const AddProductPlainHTML = () => {
     await axiosPublic
       .post("/products/add", { product })
       .then((res) => {
-        if (res.status === 201) {
+        if (res.data.insertedId > 0) {
           // successToast("Product in review")
           Swal.fire({
             position: "top-end",
@@ -42,6 +42,7 @@ const AddProductPlainHTML = () => {
             timer: 1500,
           });
           form.reset();
+          // successToast("Your product has been submitted for review") [don't know why this hook isn't working]
         }
       })
       .catch((error) => {

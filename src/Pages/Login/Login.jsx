@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const initialValues = {
   email: "",
@@ -44,10 +45,18 @@ const Login = () => {
         errorToast(`${err}`);
       });
   };
+  const axiosPublic = useAxiosPublic();
   // Logging in with google
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((res) => {
+        // if there is no user then we add a new user to the db
+        const userInfo = {
+          name: res.user.displayName,
+          image: res.user.photoURL,
+          email: res.user.email,
+        };
+        axiosPublic.post("/users/add", { userInfo });
         successToast(` ${res?.user?.displayName}, Welcome back!`);
         navigate(previousLocation ? previousLocation : "/");
       })
@@ -56,7 +65,6 @@ const Login = () => {
       });
   };
   // redirecting to the signup page
-  
 
   const handleSignUpClick = () => {
     // Use navigate to go to the signup page with state
@@ -167,7 +175,10 @@ const Login = () => {
               {/* Redirecting */}
               <p className="text-right text-base text-neutral mt-3">
                 Don&apos;t have an Account? {"  "}
-                <a className="hover:underline hover:text-accent" onClick={handleSignUpClick}>
+                <a
+                  className="hover:underline hover:text-accent"
+                  onClick={handleSignUpClick}
+                >
                   Sign Up
                 </a>
               </p>
