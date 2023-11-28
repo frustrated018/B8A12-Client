@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { RxCross2 } from "react-icons/rx";
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { TbListDetails } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const ProductReviewQueue = () => {
   const axiosSecure = useAxiosSecure();
-
+// Finding pending products
   const { data: pendingProducts = [] } = useQuery({
     queryKey: ["pendingProducts"],
     queryFn: async () => {
@@ -13,6 +15,8 @@ const ProductReviewQueue = () => {
       return res.data;
     },
   });
+
+//   
 
   return (
     <>
@@ -26,13 +30,30 @@ const ProductReviewQueue = () => {
             <thead>
               <tr>
                 <th className="text-center font-bold text-black text-lg">#</th>
-                <th className="text-center font-bold text-black text-lg">Product Image</th>
-                <th className="text-center font-bold text-black text-lg">Product Name</th>
-                <th className="text-center font-bold text-black text-lg">Owner Name</th>
-                <th className="text-center font-bold text-black text-lg">Owner email</th>
-                <th className="text-center font-bold text-black text-lg">Product Status</th>
-                <th className="text-center font-bold text-black text-lg">Approve Product</th>
-                <th className="text-center font-bold text-black text-lg">Reject Product</th>
+                <th className="text-center font-bold text-black text-lg">
+                  Product Image
+                </th>
+                <th className="text-center font-bold text-black text-lg">
+                  Product Name
+                </th>
+                <th className="text-center font-bold text-black text-lg">
+                  Owner Name
+                </th>
+                <th className="text-center font-bold text-black text-lg">
+                  Owner email
+                </th>
+                <th className="text-center font-bold text-black text-lg">
+                  Product Status
+                </th>
+                <th className="text-center font-bold text-black text-lg">
+                  View Details
+                </th>
+                <th className="text-center font-bold text-black text-lg">
+                  Approve Product
+                </th>
+                <th className="text-center font-bold text-black text-lg">
+                  Reject Product
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -43,18 +64,28 @@ const ProductReviewQueue = () => {
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="w-32 rounded">
-                          <img
-                            src={product.image}
-                            alt="Product image"
-                          />
+                          <img src={product.image} alt="Product image" />
                         </div>
                       </div>
                     </div>
                   </td>
                   <td className="text-center font-bold">{product.name}</td>
-                  <td className="text-center font-bold">{product.productOwner.name}</td>
-                  <td className="text-center font-bold">{product.productOwner.email}</td>
-                  <td className="text-center font-bold uppercase">{product.productStatus}</td>
+                  <td className="text-center font-bold">
+                    {product.productOwner.name}
+                  </td>
+                  <td className="text-center font-bold">
+                    {product.productOwner.email}
+                  </td>
+                  <td className="text-center font-bold uppercase">
+                    {product.productStatus}
+                  </td>
+                  <td className="text-center">
+                  <Link to={`/dashboard/products/details/${product._id}`}>
+                    <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
+                      <TbListDetails size={24} />
+                    </button>
+                    </Link>
+                  </td>
                   <td className="text-center">
                     <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
                       <IoCheckmarkSharp size={24} />

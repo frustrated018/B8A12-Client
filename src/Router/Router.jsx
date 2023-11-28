@@ -16,6 +16,7 @@ import ProductReviewQueue from "../Pages/Dashboard/ProductReviewQueue/ProductRev
 import ReportedProducts from "../Pages/Dashboard/ReportedProducts/ReportedProducts";
 
 const router = createBrowserRouter([
+  // Main Routes
   {
     path: "/",
     element: <MainLayout></MainLayout>,
@@ -51,6 +52,9 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  // Dahsboard Routes
+
   {
     path: "/dashboard",
     element: (
@@ -84,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: "productreviewqueue",
         element: <ProductReviewQueue></ProductReviewQueue>,
+      },
+      {
+        path: "products/details/:id",
+        element: <ProductDetails></ProductDetails>,
       },
       {
         path: "reportedproducts",
