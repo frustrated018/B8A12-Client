@@ -9,6 +9,10 @@ import { Helmet } from "react-helmet";
 
 const ProductDetails = () => {
   const { id } = useParams();
+
+  // Check if the route path contains '/dashboard'
+  const isDashboardRoute = location.pathname.includes("/dashboard");
+
   //   fetching data
   const axiosPublic = useAxiosPublic();
   const { data: product = [], refetch } = useQuery({
@@ -38,7 +42,8 @@ const ProductDetails = () => {
       <Helmet>
         <title>Tech Trends | {`${name}`}</title>
       </Helmet>
-      <NavBar></NavBar>
+      {/* Conditionally render NavBar based on the route */}
+      {!isDashboardRoute && <NavBar />}
       {/* Details section */}
       <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 w-[90%] lg:w-[70%] mx-auto my-20 shadow-lg">
         {/* Image */}
