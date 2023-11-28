@@ -37,6 +37,8 @@ const handleMakeAdmin = user =>{
     })
 }
 
+// TODO: Make the Make user Modarator function
+
   //   deleting A user from DB
   const handleDeleteUser = (user) => {
     Swal.fire({

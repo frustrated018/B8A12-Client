@@ -11,7 +11,7 @@ const Products = () => {
   const { data: products = [] } = useQuery({ // TODO: Few things are missing here like refetch and ispending [might not need those :3]
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/products");
+      const res = await axiosPublic.get("/products/approvedproducts");
       return res.data;
     },
   });
