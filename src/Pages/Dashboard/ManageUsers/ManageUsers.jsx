@@ -51,6 +51,7 @@ const ManageUsers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Update Role</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -58,8 +59,9 @@ const ManageUsers = () => {
             {users.map((user, index) => (
               <tr key={user._id}>
                 <th>{index + 1}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
+                <td className="text-lg font-bold">{user.name}</td>
+                <td className="text-lg font-bold">{user.email}</td>
+                <td className="text-lg font-bold">{user.role}</td>
                 <td>
                   {user.role === "admin" ? (
                     "Admin"
