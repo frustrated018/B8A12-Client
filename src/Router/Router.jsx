@@ -12,6 +12,8 @@ import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
+import ProductReviewQueue from "../Pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
+import ReportedProducts from "../Pages/Dashboard/ReportedProducts/ReportedProducts";
 
 const router = createBrowserRouter([
   {
@@ -71,7 +73,21 @@ const router = createBrowserRouter([
       // Admin routes
       {
         path: "manageusers",
-        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
+      },
+
+      // Modarator Routes
+      {
+        path: "productreviewqueue",
+        element: <ProductReviewQueue></ProductReviewQueue>,
+      },
+      {
+        path: "reportedproducts",
+        element: <ReportedProducts></ReportedProducts>,
       },
     ],
   },

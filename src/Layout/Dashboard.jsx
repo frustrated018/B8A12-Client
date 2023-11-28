@@ -44,21 +44,15 @@ const Dashboard = () => {
   const moderatorLinks = (
     <>
       <li className="bg-primary rounded-lg">
-        <NavLink to="/dashboard/moderatorhome">
-          <FaHome></FaHome>
-          Moderator Home
+        <NavLink to="/dashboard/productreviewqueue">
+          <FaBook></FaBook>
+          Product Review Queue
         </NavLink>
       </li>
       <li className="bg-primary rounded-lg">
-        <NavLink to="/dashboard/pendingposts">
+        <NavLink to="/dashboard/reportedproducts">
           <FaBook></FaBook>
-          Pending Posts
-        </NavLink>
-      </li>
-      <li className="bg-primary rounded-lg">
-        <NavLink to="/dashboard/reportedposts">
-          <FaBook></FaBook>
-          Reported Posts
+          Reported Products
         </NavLink>
       </li>
     </>
