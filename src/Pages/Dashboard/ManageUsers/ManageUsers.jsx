@@ -19,6 +19,24 @@ const ManageUsers = () => {
     },
   });
 
+//   Making user Admin
+const handleMakeAdmin = user =>{
+    axiosSecure.patch(`/users/makeadmin/${user._id}`)
+    .then(res =>{
+        console.log(res.data)
+        if(res.data.modifiedCount > 0){
+            refetch();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${user.name} is an Admin Now!`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
+    })
+}
+
   //   deleting A user from DB
   const handleDeleteUser = (user) => {
     Swal.fire({
@@ -68,7 +86,7 @@ const ManageUsers = () => {
 
                 <td>
                   <button
-                    // onClick={() => handleDeleteUser(user)}
+                    onClick={() => handleMakeAdmin(user)}
                     className="bg-secondary p-3 rounded-lg hover:bg-accent"
                   >
                     <GrUserAdmin size={24} />
