@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashboard";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
+      // normal routes
       {
         path: "userprofile",
         element: <UserProfile></UserProfile>,
@@ -68,9 +70,9 @@ const router = createBrowserRouter([
 
       // Admin routes
       {
-        path:"manageusers",
-        element:<ManageUsers></ManageUsers>
-      }
+        path: "manageusers",
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
+      },
     ],
   },
 ]);
