@@ -86,6 +86,7 @@ const ProductDetails = () => {
             </dl>
           </div>
           {/* Upvote Downvote and Report button */}
+          {/* TODO: Do NOT let the person who uploaded this to use these buttons */}
           <div className="mt-5 lg:mt-14 grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] mx-auto ">
             {/* upvote button */}
             <button
