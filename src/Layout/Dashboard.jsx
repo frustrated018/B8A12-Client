@@ -43,6 +43,7 @@ const Dashboard = () => {
   // Moderator links
   const moderatorLinks = (
     <>
+    {/* TODO: If you have the time add a All products page that will show all products status */}
       <li className="bg-primary rounded-lg">
         <NavLink to="/dashboard/productreviewqueue">
           <FaBook></FaBook>
