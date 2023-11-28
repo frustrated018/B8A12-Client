@@ -1,4 +1,3 @@
-import NavBar from "../../Components/NavBar/NavBar";
 import { BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
 import { MdReport } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
@@ -6,6 +5,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import NavBar from "../../Components/NavBar/NavBar";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -23,14 +23,23 @@ const ProductDetails = () => {
     },
   });
 
-  const { name, image, tags, upvoteCount, downvoteCount, longDescription } =
-    product;
+  const {
+    name,
+    image,
+    tags,
+    upvoteCount,
+    downvoteCount,
+    longDescription,
+    externalLinks,
+    productOwner,
+  } = product;
 
   // Handling Upvote
   const handleUpvote = async () => {
     await axiosPublic.post(`/products/upvote/${id}`);
     refetch();
   };
+
   // Handling Downvote
   const handleDownVote = async () => {
     await axiosPublic.post(`/products/downvote/${id}`);
@@ -54,7 +63,6 @@ const ProductDetails = () => {
         />
         <div className="p-4">
           {/* All details about product */}
-
           <div className="flow-root rounded-lg border border-primary bg-secondary py-3 shadow-sm">
             <dl className="-my-3 divide-y divide-primary text-sm">
               <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
@@ -88,10 +96,42 @@ const ProductDetails = () => {
                   {longDescription}
                 </dd>
               </div>
+
+              {/* External Links */}
+              {externalLinks && externalLinks.length > 0 && (
+                <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                  <dt className="font-medium text-gray-900">External Links</dt>
+                  <dd className="text-gray-700 sm:col-span-2">
+                    <div className="flex flex-wrap gap-2">
+                      {externalLinks.map((link, index) => (
+                        <a
+                          key={index}
+                          href={link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary underline"
+                        >
+                          {link}
+                        </a>
+                      ))}
+                    </div>
+                  </dd>
+                </div>
+              )}
+
+              {/* Product Owner */}
+              {productOwner && (
+                <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                  <dt className="font-medium text-gray-900">Product Owner</dt>
+                  <dd className="text-gray-700 sm:col-span-2">
+                    {productOwner.name}
+                  </dd>
+                </div>
+              )}
             </dl>
           </div>
+
           {/* Upvote Downvote and Report button */}
-          {/* TODO: Do NOT let the person who uploaded this to use these buttons */}
           <div className="mt-5 lg:mt-14 grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] mx-auto ">
             {/* upvote button */}
             <button
