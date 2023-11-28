@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [isAdmin] = useAdmin();
 
   // TODO: Make a moderator route as well
-  const isModerator = true;
+  const isModerator = false;
 
   // Admin links
   const adminLinks = (

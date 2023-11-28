@@ -2,10 +2,13 @@ import { useState } from "react";
 import { TagsInput } from "react-tag-input-component";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
 
 const AddProductPlainHTML = () => {
   const [selected, setSelected] = useState(["tech"]);
+  const [externalLinks, setExternalLinks] = useState([]);
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
 
   //   submitting form
   const handleSubmit = async (event) => {
@@ -26,9 +29,15 @@ const AddProductPlainHTML = () => {
       upvoteCount: 0,
       downvoteCount: 0,
       timestamp,
+      productOwner: {
+        name: user.displayName,
+        email: user.email,
+        image: user.photoURL,
+      },
+      externalLinks,
     };
-    // TODO: Need to send the user data like user email in here
-    // Make a post api call
+    // TODO: Need to send the owner data like user email in here
+
     await axiosPublic
       .post("/products/add", { product })
       .then((res) => {
@@ -92,6 +101,19 @@ const AddProductPlainHTML = () => {
             onChange={setSelected}
             name="tags"
             placeHolder="Enter tags"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="externalLinks" className="block text-gray-600 mb-2">
+            External Links:
+          </label>
+          <p className="text-xs mb-2">Press enter to add new links</p>
+          <TagsInput
+            value={externalLinks}
+            onChange={setExternalLinks}
+            name="externalLinks"
+            placeHolder="Enter links"
           />
         </div>
 
