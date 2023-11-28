@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { TagsInput } from "react-tag-input-component";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const AddProductPlainHTML = () => {
   const [selected, setSelected] = useState(["tech"]);
+  const axiosPublic = useAxiosPublic()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.productName.value;
@@ -13,8 +15,11 @@ const AddProductPlainHTML = () => {
     const longDescription = form.longDescription.value;
     const timestamp = new Date().toLocaleDateString();
     const tags = selected;
-    const product = { name, tags, image, shortDescription, longDescription, upvotecount:0, downvotecount:0, timestamp};
-    console.log("Form values:", product);
+    const product = { name, tags, image, shortDescription, longDescription, upvoteCount:0, downvoteCount:0, timestamp};
+    // Make a post api call
+    const res = await axiosPublic.post('/products/add', {product})
+    console.log(res.data);
+
   };
 
   return (
@@ -45,7 +50,7 @@ const AddProductPlainHTML = () => {
           <label htmlFor="tags" className="block text-gray-600 mb-2">
             Tags:
           </label>
-          <pre>{JSON.stringify(selected)}</pre>
+          <p className="text-xs mb-2">Press enter to add new tags</p>
           <TagsInput
             value={selected}
             onChange={setSelected}
