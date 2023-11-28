@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const initialValues = {
   name: "",
@@ -37,16 +38,24 @@ const SignUp = () => {
   const { successToast, errorToast } = useToastify();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosPublic = useAxiosPublic();
 
   // Sign up with email and password
   const handleSubmit = (values) => {
     createUser(values.email, values.password)
       .then((res) => {
         const user = res.user;
-        console.log(user);
         // updating user profile
         updateUserProfile(values.name, values.photo)
           .then(() => {
+            // Adding user info to the DB
+            const userInfo = {
+              name: values.name,
+              image: values.photo,
+              email: values.email,
+            };
+            axiosPublic.post("/users/add", { userInfo });
+
             // showing success toast
             successToast(`Hi ${user.displayName}! Welcome to our site`);
             navigate(location?.state?.from ? location.state?.from : "/");
