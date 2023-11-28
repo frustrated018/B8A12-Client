@@ -5,10 +5,8 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const Products = () => {
-
-  
   const axiosPublic = useAxiosPublic();
-  const { data: products = [] } = useQuery({ // TODO: Few things are missing here like refetch and ispending [might not need those :3]
+  const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosPublic.get("/products/approvedproducts");
