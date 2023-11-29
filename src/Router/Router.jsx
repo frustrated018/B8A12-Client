@@ -15,6 +15,7 @@ import AdminRoute from "./AdminRoute";
 import ProductReviewQueue from "../Pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
 import ReportedProducts from "../Pages/Dashboard/ReportedProducts/ReportedProducts";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
+import UpdateProduct from "../Pages/Dashboard/UpdateProduct/UpdateProduct";
 
 const router = createBrowserRouter([
   // Main Routes
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "myproducts",
         element: <MyProducts></MyProducts>,
+      },
+      {
+        path: "editproduct/:id",
+        element: <UpdateProduct></UpdateProduct>,
       },
       // Shared route between normal and
       {

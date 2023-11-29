@@ -20,7 +20,7 @@ const MyProducts = () => {
     },
   });
 
-//   TODO: Make the update and delete button Active
+  //   TODO: Make the update and delete button Active
   return (
     <>
       <p className="text-3xl font-bold mb-5">
@@ -86,9 +86,11 @@ const MyProducts = () => {
                     </Link>
                   </td>
                   <td className="text-center">
-                    <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
-                      <GrUpdate size={24} />
-                    </button>
+                    <Link to={`/dashboard/editproduct/${product._id}`}>
+                      <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
+                        <GrUpdate size={24} />
+                      </button>
+                    </Link>
                   </td>
                   <td className="text-center">
                     <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-red-600">
