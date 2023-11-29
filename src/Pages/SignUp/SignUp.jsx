@@ -89,7 +89,7 @@ const SignUp = () => {
         axiosPublic.post("/users/add", { userInfo })
         // showing success toast
         successToast(`Hi ${res?.user?.displayName}! Welcome to our site`);
-        // navigate(location?.state?.from ? location.state?.from : "/");
+        navigate(location?.state?.from ? location.state?.from : "/");
       })
       .catch((err) => {
         errorToast(`${err}`);
