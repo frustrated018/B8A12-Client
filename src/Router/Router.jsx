@@ -16,6 +16,7 @@ import ProductReviewQueue from "../Pages/Dashboard/ProductReviewQueue/ProductRev
 import ReportedProducts from "../Pages/Dashboard/ReportedProducts/ReportedProducts";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import UpdateProduct from "../Pages/Dashboard/UpdateProduct/UpdateProduct";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
   // Main Routes
@@ -80,10 +81,15 @@ const router = createBrowserRouter([
         element: <MyProducts></MyProducts>,
       },
       {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
         path: "editproduct/:id",
         element: <UpdateProduct></UpdateProduct>,
       },
-      // Shared route between normal and
+
+      // Shared route between normal and Moderators
       {
         path: "products/details/:id",
         element: <ProductDetails></ProductDetails>,
