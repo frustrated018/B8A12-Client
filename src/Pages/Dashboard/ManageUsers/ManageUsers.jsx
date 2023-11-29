@@ -19,48 +19,82 @@ const ManageUsers = () => {
     },
   });
 
-  //   Making user Admin
+  // //   Making user Admin
+  // const handleMakeAdmin = (user) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, Do it!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       axiosSecure.patch(`/users/makeadmin/${user._id}`).then((res) => {
+  //         if (res.data.modifiedCount > 0) {
+  //           refetch();
+  //           successToast(`${user.name} is an Admin Now!`);
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
+  // //   Making user Moderator
+  // const handleMakeModerator = (user) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, Do it!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       axiosSecure.patch(`/users/makemoderator/${user._id}`).then((res) => {
+  //         if (res.data.modifiedCount > 0) {
+  //           refetch();
+  //           successToast(`${user.name} is an Moderator Now!`);
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
+
+
+  const handleMakeRole = (user, role) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes, Make ${role}!`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const endpoint = role === 'admin' ? `/users/makeadmin/${user._id}` : `/users/makemoderator/${user._id}`;
+  
+        axiosSecure.patch(endpoint).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            successToast(`${user.name} is a ${role.charAt(0).toUpperCase() + role.slice(1)} Now!`);
+          }
+        });
+      }
+    });
+  };
+  
   const handleMakeAdmin = (user) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Do it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.patch(`/users/makeadmin/${user._id}`).then((res) => {
-          if (res.data.modifiedCount > 0) {
-            refetch();
-            successToast(`${user.name} is an Admin Now!`);
-          }
-        });
-      }
-    });
+    handleMakeRole(user, 'admin');
   };
-  //   Making user Moderator
+  
   const handleMakeModerator = (user) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Do it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.patch(`/users/makemoderator/${user._id}`).then((res) => {
-          if (res.data.modifiedCount > 0) {
-            refetch();
-            successToast(`${user.name} is an Moderator Now!`);
-          }
-        });
-      }
-    });
+    handleMakeRole(user, 'moderator');
   };
+  
+
 
   // TODO: Make the Make user Modarator function
 
