@@ -6,6 +6,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 // import useToastify from "../../../Hooks/useToastify";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const MyProducts = () => {
   const axiosPublic = useAxiosPublic();
@@ -20,20 +21,41 @@ const MyProducts = () => {
     },
   });
 
-  //Deleting Product
   const handleDelete = async (id) => {
-    try {
-      // Send DELETE request to the backend API
-      await axiosPublic.delete(`/products/deleteproduct/${id}`);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Send DELETE request to the backend API
+          await axiosPublic.delete(`/products/deleteproduct/${id}`);
 
-      refetch();
-      // TODO: show A toast
-      // successToast("Product deleted successfully");
-    } catch (error) {
-      console.error("Error deleting product:", error);
-      // Handle errors, show error toast or perform other actions
-    }
+          // Refetching to Update UI
+          refetch();
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your Product has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.error("Error deleting product:", error);
+          Swal.fire({
+            title: "Error",
+            text: "An error occurred while deleting the product.",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
+
   return (
     <>
       <p className="text-3xl font-bold mb-5">
