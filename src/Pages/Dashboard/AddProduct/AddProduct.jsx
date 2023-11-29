@@ -3,14 +3,16 @@ import { TagsInput } from "react-tag-input-component";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const AddProductPlainHTML = () => {
   const [selected, setSelected] = useState(["tech"]);
   const [externalLinks, setExternalLinks] = useState([]);
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
+  const navigate = useNavigate()
 
-  //   submitting form
+  //   Submitting form
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -51,6 +53,7 @@ const AddProductPlainHTML = () => {
             timer: 1500,
           });
           form.reset();
+          navigate('/dashboard/myproducts')
           // successToast("Your product has been submitted for review") [don't know why this hook isn't working]
           // TODO: Fixed the toast issue it should work fine now [Fix it later]
         }

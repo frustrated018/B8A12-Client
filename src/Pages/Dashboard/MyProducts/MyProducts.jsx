@@ -12,7 +12,7 @@ const MyProducts = () => {
   const { user } = useAuth();
   // const { successToast } = useToastify();
   // Finding pending products
-  const { data: myProducts = [] } = useQuery({
+  const { data: myProducts = [], refetch } = useQuery({
     queryKey: ["myProducts"],
     queryFn: async () => {
       const res = await axiosPublic.get(`products/myproducts/${user.email}`);
@@ -20,7 +20,20 @@ const MyProducts = () => {
     },
   });
 
-  //   TODO: Make the update and delete button Active
+  //Deleting Product
+  const handleDelete = async (id) => {
+    try {
+      // Send DELETE request to the backend API
+      await axiosPublic.delete(`/products/deleteproduct/${id}`);
+
+      refetch();
+      // TODO: show A toast
+      // successToast("Product deleted successfully");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      // Handle errors, show error toast or perform other actions
+    }
+  };
   return (
     <>
       <p className="text-3xl font-bold mb-5">
@@ -93,7 +106,10 @@ const MyProducts = () => {
                     </Link>
                   </td>
                   <td className="text-center">
-                    <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-red-600">
+                    <button
+                      onClick={() => handleDelete(product._id)}
+                      className="p-3 bg-secondary hover:bg-accent rounded-lg text-red-600"
+                    >
                       <RxCross2 size={24} />
                     </button>
                   </td>
