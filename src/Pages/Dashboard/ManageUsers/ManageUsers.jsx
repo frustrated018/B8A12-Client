@@ -62,6 +62,7 @@ const ManageUsers = () => {
   //   });
   // };
 
+  // Combined handler function for making Admin & Moderator
 
   const handleMakeRole = (user, role) => {
     Swal.fire({

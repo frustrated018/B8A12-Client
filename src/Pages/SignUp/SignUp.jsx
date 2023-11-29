@@ -47,7 +47,8 @@ const SignUp = () => {
       name: values.name,
       image: values.photo,
       email: values.email,
-      role: "user"
+      role: "user",
+      verificationStatus: "unverified"
     };
 
     createUser(values.email, values.password)
