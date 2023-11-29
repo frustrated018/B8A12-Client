@@ -3,7 +3,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { TagsInput } from "react-tag-input-component";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
   const [selected, setSelected] = useState(["tech"]);
@@ -12,12 +12,15 @@ const UpdateProduct = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const params = useParams();
+  const navigate = useNavigate();
 
   // Getting data from server and loading them inside the state as default values
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axiosPublic.get(`/products/details/${params.id}`);
+        const response = await axiosPublic.get(
+          `/products/details/${params.id}`
+        );
         // Set the product data in the state
         setProductData(response.data);
         // Set default values in the form
@@ -60,18 +63,20 @@ const UpdateProduct = () => {
     // TODO: Need to send the owner data like user email in here
 
     await axiosPublic
-      .post("/products/add", { product })
+      .put(`/products/editproduct/${productData._id}`, { product })
       .then((res) => {
-        if (res.data.insertedId > 0) {
+        console.log(res);
+        if (res.data.modifiedCount > 0) {
           // successToast("Product in review")
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Your product has been submitted",
+            title: "Product Updated Successfully",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2000,
           });
-          form.reset();
+          navigate('/dashboard/myproducts')
+        //   form.reset();
           // successToast("Your product has been submitted for review") [don't know why this hook isn't working]
           // TODO: Fixed the toast issue it should work fine now [Fix it later]
         }
@@ -80,7 +85,7 @@ const UpdateProduct = () => {
         Swal.fire({
           position: "top-end",
           icon: "error",
-          title: "Can't submit the product",
+          title: "Can't Update the product",
           showConfirmButton: false,
           timer: 1500,
         });
