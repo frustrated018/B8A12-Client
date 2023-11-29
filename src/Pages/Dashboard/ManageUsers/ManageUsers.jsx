@@ -19,25 +19,40 @@ const ManageUsers = () => {
     },
   });
 
-//   Making user Admin
-const handleMakeAdmin = user =>{
-    axiosSecure.patch(`/users/makeadmin/${user._id}`)
-    .then(res =>{
-        console.log(res.data)
-        if(res.data.modifiedCount > 0){
-            refetch();
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: `${user.name} is an Admin Now!`,
-                showConfirmButton: false,
-                timer: 1500
-              });
-        }
-    })
-}
+  //   Making user Admin
+  const handleMakeAdmin = (user) => {
+    axiosSecure.patch(`/users/makeadmin/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is an Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+  //   Making user Moderator
+  const handleMakeModerator = (user) => {
+    axiosSecure.patch(`/users/makemoderator/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is an Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
-// TODO: Make the Make user Modarator function
+  // TODO: Make the Make user Modarator function
 
   //   deleting A user from DB
   const handleDeleteUser = (user) => {
@@ -62,31 +77,35 @@ const handleMakeAdmin = user =>{
   };
   return (
     <>
-      <h1 className="text-4xl font-bold my-5">Total Users: {users.length}</h1>
+      <h1 className="text-4xl font-bold my-5 text-center">
+        Total Users: {users.length}
+      </h1>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           {/* head */}
-          <thead className="text-lg font-bold text-black">
+          <thead className="text-base font-bold text-white bg-primary">
             <tr>
               <th></th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Make Admin</th>
-              <th>Make Modarator</th>
-              <th>Action</th>
+              <th className="text-center">Name</th>
+              <th className="text-center">Email</th>
+              <th className="text-center">Role</th>
+              <th className="text-center">Make Admin</th>
+              <th className="text-center">Make Moderator</th>
+              <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={user._id}>
-                <th>{index + 1}</th>
-                <td className="text-lg font-bold">{user.name}</td>
-                <td className="text-lg font-bold">{user.email}</td>
-                <td className="text-lg font-bold">{user.role}</td>
+                <th className="text-center">{index + 1}</th>
+                <td className="text-base font-bold text-center">{user.name}</td>
+                <td className="text-base font-bold text-center">
+                  {user.email}
+                </td>
+                <td className="text-base font-bold text-center">{user.role}</td>
 
-                <td>
+                <td className="text-center">
                   <button
                     onClick={() => handleMakeAdmin(user)}
                     className="bg-secondary p-3 rounded-lg hover:bg-accent"
@@ -94,15 +113,15 @@ const handleMakeAdmin = user =>{
                     <GrUserAdmin size={24} />
                   </button>
                 </td>
-                <td>
+                <td className="text-center">
                   <button
-                    // onClick={() => handleDeleteUser(user)}
+                    onClick={() => handleMakeModerator(user)}
                     className="bg-secondary p-3 rounded-lg hover:bg-accent"
                   >
                     <MdAdminPanelSettings size={24} />
                   </button>
                 </td>
-                <td>
+                <td className="text-center">
                   <button
                     onClick={() => handleDeleteUser(user)}
                     className="bg-secondary p-3 rounded-lg hover:bg-accent"

@@ -2,38 +2,44 @@ import { FaBook, FaHome, FaUser } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import { MdOutlineNoteAdd } from "react-icons/md";
 import { BsCollectionFill } from "react-icons/bs";
-import { ImStatsDots } from "react-icons/im";
+// import { ImStatsDots } from "react-icons/im";
 import { FaUsersCog } from "react-icons/fa";
-import { AiFillGift } from "react-icons/ai";
+// import { AiFillGift } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUserRole from "../Hooks/useUserRole";
 const Dashboard = () => {
   // TODO: Check admin from DB
-  const {userRole} = useUserRole();
-  
+  const { userRole } = useUserRole();
 
   // Admin links
+  // TODO: Activate site links when you make the pages
   const adminLinks = (
     <>
       <li className="bg-primary rounded-lg">
         <NavLink to="/dashboard/userProfile">
+          <FaUser></FaUser>
+          Admin Profile
+        </NavLink>
+      </li>
+      {/* <li className="bg-primary rounded-lg">
+        <NavLink to="/dashboard/userProfile">
           <ImStatsDots />
           Site Stats
         </NavLink>
-      </li>
+      </li> */}
       <li className="bg-primary rounded-lg">
         <NavLink to="/dashboard/manageusers">
           <FaUsersCog />
           Manage Users
         </NavLink>
       </li>
-      <li className="bg-primary rounded-lg">
+      {/* <li className="bg-primary rounded-lg">
         <NavLink to="/dashboard/myproducts">
           <AiFillGift />
           Manage Coupon
         </NavLink>
-      </li>
+      </li> */}
     </>
   );
 
