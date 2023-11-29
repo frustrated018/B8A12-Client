@@ -7,14 +7,11 @@ import { FaUsersCog } from "react-icons/fa";
 import { AiFillGift } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useAdmin from "../Hooks/useAdmin";
-
+import useUserRole from "../Hooks/useUserRole";
 const Dashboard = () => {
   // TODO: Check admin from DB
-  const [isAdmin] = useAdmin();
-
-  // TODO: Make a moderator route as well
-  const isModerator = false;
+  const {userRole} = useUserRole();
+  
 
   // Admin links
   const adminLinks = (
@@ -43,7 +40,7 @@ const Dashboard = () => {
   // Moderator links
   const moderatorLinks = (
     <>
-    {/* TODO: If you have the time add a All products page that will show all products status */}
+      {/* TODO: If you have the time add a All products page that will show all products status */}
       <li className="bg-primary rounded-lg">
         <NavLink to="/dashboard/productreviewqueue">
           <FaBook></FaBook>
@@ -89,11 +86,9 @@ const Dashboard = () => {
         {/* dashboard side bar */}
         <div className="w-64 min-h-screen bg-secondary">
           <ul className="menu p-4 text-white space-y-1">
-            {isAdmin
-              ? adminLinks
-              : isModerator
-              ? moderatorLinks
-              : commonUserLinks}
+            {userRole === "admin" && adminLinks}
+            {userRole === "moderator" && moderatorLinks}
+            {userRole === "user" && commonUserLinks}
 
             {/* shared nav links */}
             <div className="divider"></div>
