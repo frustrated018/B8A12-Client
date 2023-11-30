@@ -11,17 +11,19 @@ import Reviews from "../../Components/Reviews/Reviews";
 import ReviewForm from "../../Components/ReviewForm/ReviewForm";
 import useAuth from "../../Hooks/useAuth";
 import Offers from "../../Components/Offers/Offers";
+import useToastify from "../../Hooks/useToastify";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const location = useLocation();
   const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const { warningToast, errorToast } = useToastify();
 
   // Check if the route path contains '/dashboard'
   const isDashboardRoute = location.pathname.includes("/dashboard");
 
   // Fetching data
-  const axiosPublic = useAxiosPublic();
   const { data: product = [], refetch } = useQuery({
     queryKey: ["product"],
     queryFn: async () => {
@@ -57,6 +59,25 @@ const ProductDetails = () => {
     refetch();
   };
 
+  const handleReport = async () => {
+    try {
+      const res = await axiosPublic.post(
+        `products/markreported/${id}?reportedStatus=reported`
+      );
+
+      if (res.data.reportedStatus > 0) {
+        warningToast("Product has been marked for review");
+      } else {
+        errorToast("Product couldn't be marked for review");
+      }
+    } catch (error) {
+      console.error(error);
+      errorToast("An error occurred while processing the report");
+    }
+  };
+
+
+  
   // Toggle the visibility of the review form
   const handleAddReviewClick = () => {
     setReviewFormVisible(!isReviewFormVisible);
@@ -175,7 +196,10 @@ const ProductDetails = () => {
               <span>{downvoteCount}</span>
             </button>
             {/* report button */}
-            <button className="p-3 bg-red-400 rounded-md flex justify-center items-center gap-2">
+            <button
+              onClick={handleReport}
+              className="p-3 bg-red-400 rounded-md flex justify-center items-center gap-2"
+            >
               <span>Report </span>
               <MdReport size={24} />
             </button>

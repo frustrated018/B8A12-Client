@@ -114,7 +114,7 @@ const MyProducts = () => {
                     {product.productStatus}
                   </td>
                   <td className="text-center">
-                    <Link to={`/dashboard/products/details/${product._id}`}>
+                    <Link to={`/dashboard/details/${product._id}`}>
                       <button className="p-3 bg-secondary hover:bg-accent rounded-lg text-green-600">
                         <TbListDetails size={24} />
                       </button>

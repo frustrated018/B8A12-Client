@@ -19,6 +19,7 @@ import UpdateProduct from "../Pages/Dashboard/UpdateProduct/UpdateProduct";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import ManageCuopons from "../Pages/ManageCuopons/ManageCuopons";
 import UpdateCoupon from "../Components/UpdateCoupon/UpdateCoupon";
+import DashboardProductDetials from "../Pages/Dashboard/DashboardProductDetails/DashboardProductDetails";
 
 const router = createBrowserRouter([
   // Main Routes
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "products/details/:id",
+        path: "/products/details/:id",
         element: (
           <PrivateRoute>
             <ProductDetails></ProductDetails>
@@ -93,8 +94,8 @@ const router = createBrowserRouter([
 
       // Shared route between normal and Moderators
       {
-        path: "products/details/:id",
-        element: <ProductDetails></ProductDetails>,
+        path: "details/:id",
+        element: <DashboardProductDetials></DashboardProductDetials>,
       },
       // Admin routes
       {
