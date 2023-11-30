@@ -28,7 +28,7 @@ const Reviews = ({ productId }) => {
       <section className=" w-[80%] mx-auto bg-secondary rounded-lg shadow-lg">
         <div className="py-5">
           <h1 className="text-black text-center sm:text-4xl lg:text-5xl font-bold font-sans">
-            Review&apos;s
+            Reviews
           </h1>
           <p className="text-neutral text-base text-center mt-2">
             Look What others think about this product

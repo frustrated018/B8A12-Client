@@ -10,6 +10,7 @@ import NavBar from "../../Components/NavBar/NavBar";
 import Reviews from "../../Components/Reviews/Reviews";
 import ReviewForm from "../../Components/ReviewForm/ReviewForm";
 import useAuth from "../../Hooks/useAuth";
+import Offers from "../../Components/Offers/Offers";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -68,6 +69,11 @@ const ProductDetails = () => {
       </Helmet>
       {/* Conditionally render NavBar based on the route */}
       {!isDashboardRoute && <NavBar />}
+      {/* Offers section */}
+      <section className="flex justify-center items-center mt-8">
+        <Offers></Offers>
+      </section>
+
       {/* Details section */}
       <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 w-[90%] lg:w-[70%] mx-auto my-20 shadow-lg">
         {/* Image */}
