@@ -63,10 +63,10 @@ const CheckOutForm = () => {
         },
       });
     if (confirmError) {
-      console.log("Confirmation Error", confirmError);
+      // console.log("Confirmation Error", confirmError);
       errorToast(confirmError.message);
     } else {
-      console.log("Payment Intent", paymentIntent);
+      // console.log("Payment Intent", paymentIntent);
       setTransactionId(paymentIntent.id);
       // Making the API call to update their verification status
       axiosSecure
@@ -74,7 +74,7 @@ const CheckOutForm = () => {
           verificationStatus: "verified",
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.updatedStatusCount > 0) {
             successToast("Payment Successful. You are a verified user now");
             navigate("/dashboard/userProfile");
