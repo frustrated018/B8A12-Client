@@ -4,6 +4,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 const AddProductPlainHTML = () => {
   const [selected, setSelected] = useState(["tech"]);
@@ -22,9 +23,11 @@ const AddProductPlainHTML = () => {
     const longDescription = form.longDescription.value;
     const timestamp = new Date().toLocaleDateString();
     const tags = selected;
+    const productId = uuidv4();
     const product = {
       name,
       tags,
+      productId,
       image,
       shortDescription,
       longDescription,

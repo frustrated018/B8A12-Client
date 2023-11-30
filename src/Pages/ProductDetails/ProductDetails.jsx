@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import NavBar from "../../Components/NavBar/NavBar";
+import Reviews from "../../Components/Reviews/Reviews";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -161,6 +162,11 @@ const ProductDetails = () => {
             </button>
           </div>
         </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section>
+        <Reviews></Reviews>
       </section>
     </>
   );
