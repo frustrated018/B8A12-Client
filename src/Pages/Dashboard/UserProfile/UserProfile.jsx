@@ -26,7 +26,7 @@ const UserProfile = () => {
         />
         <div className="p-6">
           <h2 className="text-2xl font-bold mb-2">{userInDB? userInDB.name: ""}</h2>
-          <p className="text-gray-600">{userInDB? userInDB.name: ""}</p>
+          <p className="text-gray-600">{userInDB? userInDB.email: ""}</p>
           <div className="flex items-center mt-4">
             <RiVerifiedBadgeFill size={24} className="text-green-500 mr-2" />
             <span className="text-lg font-semibold text-green-500">
