@@ -33,6 +33,7 @@ const ProductDetails = () => {
     longDescription,
     externalLinks,
     productOwner,
+    productId,
   } = product;
 
   // Handling Upvote
@@ -165,8 +166,8 @@ const ProductDetails = () => {
       </section>
 
       {/* Reviews Section */}
-      <section>
-        <Reviews></Reviews>
+      <section className="my-10">
+        <Reviews productId={productId}></Reviews>
       </section>
     </>
   );
