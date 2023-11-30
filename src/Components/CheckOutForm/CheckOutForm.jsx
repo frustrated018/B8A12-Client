@@ -2,6 +2,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
+import useToastify from "../../Hooks/useToastify";
+import { useNavigate } from "react-router-dom";
+
+// TODO: If I navigate the user to the profile page I don't need the transaction id. And i will disable the payment button once they get navigated but if they somehow manage to get back to the payment page I need to disable the payment method and show them their transation id.
 
 const CheckOutForm = () => {
   const stripe = useStripe();
@@ -10,6 +14,8 @@ const CheckOutForm = () => {
   const { user } = useAuth();
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const { successToast, errorToast } = useToastify();
+  const navigate = useNavigate();
 
   // Fixed Price For my application
   const totalPrice = 25;
@@ -58,9 +64,22 @@ const CheckOutForm = () => {
       });
     if (confirmError) {
       console.log("Confirmation Error", confirmError);
+      errorToast(confirmError.message);
     } else {
       console.log("Payment Intent", paymentIntent);
       setTransactionId(paymentIntent.id);
+      // Making the API call to update their verification status
+      axiosSecure
+        .patch(`/users/updateverification/${user.email}`, {
+          verificationStatus: "verified",
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.updatedStatusCount > 0) {
+            successToast("Payment Successful. You are a verified user now");
+            navigate("/dashboard/userProfile");
+          }
+        });
     }
   };
 
