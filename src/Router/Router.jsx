@@ -18,6 +18,7 @@ import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import UpdateProduct from "../Pages/Dashboard/UpdateProduct/UpdateProduct";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import ManageCuopons from "../Pages/ManageCuopons/ManageCuopons";
+import UpdateCoupon from "../Components/UpdateCoupon/UpdateCoupon";
 
 const router = createBrowserRouter([
   // Main Routes
@@ -109,6 +110,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageCuopons></ManageCuopons>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "updatecoupon/:id",
+        element: (
+          <AdminRoute>
+            <UpdateCoupon></UpdateCoupon>
           </AdminRoute>
         ),
       },

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageCuopons = () => {
   const axiosPublic = useAxiosPublic();
@@ -12,8 +13,6 @@ const ManageCuopons = () => {
       return res.data;
     },
   });
-
-  console.log(cuopons);
 
   return (
     <>
@@ -48,9 +47,11 @@ const ManageCuopons = () => {
                 </td>
                 {/* Update  */}
                 <td className="text-center">
-                  <button className="bg-secondary p-3 rounded-lg hover:bg-accent">
-                    <FaEdit size={24} />
-                  </button>
+                  <Link to={`/dashboard/updatecoupon/${coupon._id}`}>
+                    <button className="bg-secondary p-3 rounded-lg hover:bg-accent">
+                      <FaEdit size={24} />
+                    </button>
+                  </Link>
                 </td>
                 {/* Delete */}
                 <td className="text-center">
