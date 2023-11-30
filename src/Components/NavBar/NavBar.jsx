@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoMdMenu } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
 import useToastify from "../../Hooks/useToastify";
@@ -9,8 +9,7 @@ const NavBar = () => {
 
   const handleLogOut = () => {
     logOut()
-      // TODO: Remove broweser alert and add Toast
-      .then(successToast("Logout Successfull"))
+      .then(successToast("Logout Successful"))
       .catch((err) => {
         errorToast(`${err}`);
       });
@@ -20,9 +19,6 @@ const NavBar = () => {
   const links = [
     { to: "/", label: "Home" },
     { to: "/products", label: "Products" },
-    { to: "/login", label: "Login" },
-    { to: "/dashboard", label: "Dashboard" },
-    { to: "/error", label: "Error" },
   ];
 
   return (
@@ -102,7 +98,9 @@ const NavBar = () => {
                   <p>{user?.displayName}</p>
                 </li>
                 <li>
-                  <p>Dashboard</p>
+                  <Link to="/dashboard">
+                    <p>Dashboard</p>
+                  </Link>
                 </li>
                 <li>
                   <button onClick={handleLogOut}>Log Out</button>
@@ -110,6 +108,14 @@ const NavBar = () => {
               </ul>
             )}
           </div>
+          {!user && (
+            <NavLink
+              to="/login"
+              className="px-4 py-2 rounded-md text-center font-semibold text-white bg-accent"
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       </div>
     </>
