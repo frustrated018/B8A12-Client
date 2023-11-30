@@ -15,7 +15,11 @@ const ReviewCard = ({ review }) => {
             <img
               alt="user"
               //  Change the image once you add image functions
-              src="https://source.unsplash.com/random/500x500/?headshot"
+              src={
+                review.userImage
+                  ? review.userImage
+                  : "https://source.unsplash.com/random/500x500/?headshot"
+              }
               className="h-16 w-16 rounded-lg object-fit shadow-sm"
             />
           </div>
