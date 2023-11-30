@@ -10,7 +10,7 @@ import useAuth from "./useAuth";
 // Issue Fixed !!!
 
 const axiosSecure = axios.create({
-  baseURL: "https://tech-trends-new-server.vercel.app",
+  baseURL: "https://server-tech-trend.vercel.app",
 });
 const useAxiosSecure = () => {
   const navigate = useNavigate();
