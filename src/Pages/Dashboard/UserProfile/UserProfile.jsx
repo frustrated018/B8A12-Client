@@ -21,12 +21,14 @@ const UserProfile = () => {
       <div className="max-w-md bg-white rounded-lg overflow-hidden shadow-md">
         <img
           alt="user profile"
-          src={userInDB? userInDB.image: ""}
+          src={userInDB ? userInDB.image : ""}
           className="h-64 w-full object-cover"
         />
         <div className="p-6">
-          <h2 className="text-2xl font-bold mb-2">{userInDB? userInDB.name: ""}</h2>
-          <p className="text-gray-600">{userInDB? userInDB.email: ""}</p>
+          <h2 className="text-2xl font-bold mb-2">
+            {userInDB ? userInDB.name : ""}
+          </h2>
+          <p className="text-gray-600">{userInDB ? userInDB.email : ""}</p>
           <div className="flex items-center mt-4">
             <RiVerifiedBadgeFill size={24} className="text-green-500 mr-2" />
             <span className="text-lg font-semibold text-green-500">
@@ -39,7 +41,10 @@ const UserProfile = () => {
       </div>
 
       <Link to="/dashboard/payment">
-        <button className="mt-8 p-4 bg-primary hover:bg-accent rounded-lg text-white text-xl font-bold">
+        <button
+          hidden={userInDB && userInDB.verificationStatus === "verified"}
+          className="mt-8 p-4 bg-primary hover:bg-accent rounded-lg text-white text-xl font-bold"
+        >
           Get Verified
         </button>
       </Link>
