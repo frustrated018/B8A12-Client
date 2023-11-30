@@ -17,7 +17,7 @@ import ReportedProducts from "../Pages/Dashboard/ReportedProducts/ReportedProduc
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import UpdateProduct from "../Pages/Dashboard/UpdateProduct/UpdateProduct";
 import Payment from "../Pages/Dashboard/Payment/Payment";
-import ManageCupons from "../Pages/Dashboard/ManageCupons/ManageCupons";
+import ManageCuopons from "../Pages/ManageCuopons/ManageCuopons";
 
 const router = createBrowserRouter([
   // Main Routes
@@ -105,10 +105,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "managecupons",
+        path: "managecuopons",
         element: (
           <AdminRoute>
-            <ManageCupons></ManageCupons>
+            <ManageCuopons></ManageCuopons>
           </AdminRoute>
         ),
       },

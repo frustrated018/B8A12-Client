@@ -35,7 +35,7 @@ const Dashboard = () => {
         </NavLink>
       </li>
       <li className="bg-primary rounded-lg">
-        <NavLink to="/dashboard/managecupons">
+        <NavLink to="/dashboard/managecuopons">
           <AiFillGift />
           Manage Coupon
         </NavLink>
