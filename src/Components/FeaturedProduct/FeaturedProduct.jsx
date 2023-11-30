@@ -15,8 +15,6 @@ const FeaturedProduct = () => {
 
   const [visibleProducts, setVisibleProducts] = useState(4);
 
-  console.log(latestProducts);
-
   const handleShowMore = () => {
     setVisibleProducts((prevVisible) => prevVisible + 4);
   };
