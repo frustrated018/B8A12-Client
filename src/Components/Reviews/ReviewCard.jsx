@@ -14,7 +14,7 @@ const ReviewCard = ({ review }) => {
           <div className="hidden sm:block sm:shrink-0">
             <img
               alt="user"
-              //   need to add images
+              //  Change the image once you add image functions
               src="https://source.unsplash.com/random/500x500/?headshot"
               className="h-16 w-16 rounded-lg object-fit shadow-sm"
             />

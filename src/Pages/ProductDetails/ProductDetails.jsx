@@ -1,20 +1,25 @@
+import { useState } from "react";
 import { BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
 import { MdReport } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import NavBar from "../../Components/NavBar/NavBar";
 import Reviews from "../../Components/Reviews/Reviews";
+import ReviewForm from "../../Components/ReviewForm/ReviewForm";
+import useAuth from "../../Hooks/useAuth";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const location = useLocation();
+  const { user } = useAuth();
 
   // Check if the route path contains '/dashboard'
   const isDashboardRoute = location.pathname.includes("/dashboard");
 
-  //   fetching data
+  // Fetching data
   const axiosPublic = useAxiosPublic();
   const { data: product = [], refetch } = useQuery({
     queryKey: ["product"],
@@ -36,6 +41,9 @@ const ProductDetails = () => {
     productId,
   } = product;
 
+  // State to manage the visibility of the review form
+  const [isReviewFormVisible, setReviewFormVisible] = useState(false);
+
   // Handling Upvote
   const handleUpvote = async () => {
     await axiosPublic.post(`/products/upvote/${id}`);
@@ -46,6 +54,11 @@ const ProductDetails = () => {
   const handleDownVote = async () => {
     await axiosPublic.post(`/products/downvote/${id}`);
     refetch();
+  };
+
+  // Toggle the visibility of the review form
+  const handleAddReviewClick = () => {
+    setReviewFormVisible(!isReviewFormVisible);
   };
 
   return (
@@ -134,7 +147,11 @@ const ProductDetails = () => {
           </div>
 
           {/* Upvote Downvote and Report button */}
-          <div className="mt-5 lg:mt-14 grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] mx-auto ">
+          {/* TODO: Make this hidded for a couple of clause like no user if owner email === user.email */}
+          <div
+            hidden={!user}
+            className="mt-5 lg:mt-14 grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] mx-auto "
+          >
             {/* upvote button */}
             <button
               onClick={handleUpvote}
@@ -157,11 +174,24 @@ const ProductDetails = () => {
               <MdReport size={24} />
             </button>
             {/* review button */}
-            <button className="p-3 bg-blue-400 rounded-md flex justify-center items-center gap-2">
+            <button
+              onClick={handleAddReviewClick}
+              className="p-3 bg-blue-400 rounded-md flex justify-center items-center gap-2"
+            >
               <IoMdAddCircle size={24} />
-              <span>Review</span>
+              <span>Add Review</span>
             </button>
           </div>
+
+          {/* Review Form (conditionally rendered based on visibility state) */}
+          {isReviewFormVisible && (
+            <ReviewForm
+              productId={productId}
+              userEmail={user?.email}
+              userName={user?.displayName}
+              userImage={user.photoURL}
+            />
+          )}
         </div>
       </section>
 
