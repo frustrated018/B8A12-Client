@@ -20,7 +20,7 @@ const ReportedProducts = () => {
   return (
     <>
       <p className="text-3xl font-bold mb-5">
-        Total Pending products: {reportedProducts.length}
+        Total Reported products: {reportedProducts.length}
       </p>
       <div>
         <div className="overflow-x-auto">
@@ -46,10 +46,10 @@ const ReportedProducts = () => {
                   View Details
                 </th>
                 <th className="text-center font-bold text-black">
-                  Approve Product
+                  Un Report Product
                 </th>
                 <th className="text-center font-bold text-black">
-                  Reject Product
+                  Remove Product
                 </th>
               </tr>
             </thead>
@@ -74,7 +74,7 @@ const ReportedProducts = () => {
                     {product.productOwner.email}
                   </td>
                   <td className="text-center font-bold uppercase">
-                    {product.productStatus}
+                    {product.reportedStatus}
                   </td>
                   <td className="text-center">
                     <Link to={`/dashboard/products/details/${product._id}`}>
