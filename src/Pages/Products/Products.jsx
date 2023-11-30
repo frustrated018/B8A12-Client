@@ -20,9 +20,6 @@ const Products = () => {
         <title>Tech Trends | Products</title>
       </Helmet>
       <NavBar></NavBar>
-      <h2 className=" text-center text-3xl text-red-600 mt-10">
-        All products will be here
-      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-[90%] lg:w-[80%] mx-auto my-20">
         {products.map((product, idx) => (
           <ProductCard key={idx} product={product}></ProductCard>
