@@ -4,7 +4,7 @@ import { MdOutlineNoteAdd } from "react-icons/md";
 import { BsCollectionFill } from "react-icons/bs";
 // import { ImStatsDots } from "react-icons/im";
 import { FaUsersCog } from "react-icons/fa";
-// import { AiFillGift } from "react-icons/ai";
+import { AiFillGift } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUserRole from "../Hooks/useUserRole";
@@ -34,12 +34,12 @@ const Dashboard = () => {
           Manage Users
         </NavLink>
       </li>
-      {/* <li className="bg-primary rounded-lg">
-        <NavLink to="/dashboard/myproducts">
+      <li className="bg-primary rounded-lg">
+        <NavLink to="/dashboard/managecupons">
           <AiFillGift />
           Manage Coupon
         </NavLink>
-      </li> */}
+      </li>
     </>
   );
 
