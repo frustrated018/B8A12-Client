@@ -1,3 +1,4 @@
+import FeaturedProduct from "../../Components/FeaturedProduct/FeaturedProduct";
 import Footer from "../../Components/Footer/Footer";
 import NavBar from "../../Components/NavBar/NavBar";
 import Banner from "./Banner/Banner";
@@ -11,6 +12,7 @@ const Home = () => {
       </Helmet>
       <NavBar></NavBar>
       <Banner></Banner>
+      <FeaturedProduct></FeaturedProduct>
       <Footer></Footer>
     </>
   );
